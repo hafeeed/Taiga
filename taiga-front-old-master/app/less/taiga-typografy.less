@@ -1,0 +1,272 @@
+/* Typography */
+
+@font-face {
+    font-family: 'DroidSansRegular';
+    src: url('../fonts/DroidSans-webfont.eot');
+    src: url('../fonts/DroidSans-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/DroidSans-webfont.woff') format('woff'),
+         url('../fonts/DroidSans-webfont.ttf') format('truetype'),
+         url('../fonts/DroidSans-webfont.svg#DroidSansRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'DroidSansBold';
+    src: url('../fonts/DroidSans-Bold-webfont.eot');
+    src: url('../fonts/DroidSans-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/DroidSans-Bold-webfont.woff') format('woff'),
+         url('../fonts/DroidSans-Bold-webfont.ttf') format('truetype'),
+         url('../fonts/DroidSans-Bold-webfont.svg#DroidSansBold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DroidSerifRegular';
+    src: url('../fonts/DroidSerif-Regular-webfont.eot');
+    src: url('../fonts/DroidSerif-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/DroidSerif-Regular-webfont.woff') format('woff'),
+         url('../fonts/DroidSerif-Regular-webfont.ttf') format('truetype'),
+         url('../fonts/DroidSerif-Regular-webfont.svg#DroidSerifRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'DroidSerifBold';
+    src: url('../fonts/DroidSerif-Bold-webfont.eot');
+    src: url('../fonts/DroidSerif-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/DroidSerif-Bold-webfont.woff') format('woff'),
+         url('../fonts/DroidSerif-Bold-webfont.ttf') format('truetype'),
+         url('../fonts/DroidSerif-Bold-webfont.svg#DroidSerifBold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LeagueGothicRegular';
+    src: url('../fonts/leaguegothic-regular-webfont.eot');
+    src: url('../fonts/leaguegothic-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/leaguegothic-regular-webfont.woff') format('woff'),
+         url('../fonts/leaguegothic-regular-webfont.ttf') format('truetype'),
+         url('../fonts/leaguegothic-regular-webfont.svg#ArvoBold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LeagueGothicCondensed';
+    src: url('../fonts/leaguegothic-condensed-regular-webfont.eot');
+    src: url('../fonts/leaguegothic-condensed-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/leaguegothic-condensed-regular-webfont.woff') format('woff'),
+         url('../fonts/leaguegothic-condensed-regular-webfont.ttf') format('truetype'),
+         url('../fonts/leaguegothic-condensed-regular-webfont.svg#ArvoBold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ColabThi';
+    src: url('../fonts/ColabThi-webfont.eot');
+    src: url('../fonts/ColabThi-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/ColabThi-webfont.woff') format('woff'),
+         url('../fonts/ColabThi-webfont.ttf') format('truetype'),
+         url('../fonts/ColabThi-webfont.svg#ArvoBold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ColabReg';
+    src: url('../fonts/ColabReg-webfont.eot');
+    src: url('../fonts/ColabReg-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/ColabReg-webfont.woff') format('woff'),
+         url('../fonts/ColabReg-webfont.ttf') format('truetype'),
+         url('../fonts/ColabReg-webfont.svg#ArvoBold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/* Icon fonts */
+ 
+@charset "UTF-8";
+ 
+@font-face {
+  font-family: "taiga";
+  src:url("../fonts/taiga.eot");
+  src:url("../fonts/taiga.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/taiga.ttf") format("truetype"),
+    url("../fonts/taiga.svg#taiga") format("svg"),
+    url("../fonts/taiga.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+ 
+[data-icon]:before {
+  font-family: "taiga" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="ico-"]:before,
+[class*=" ico-"]:before {
+  font-family: "taiga" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ico-bug:before {
+  content: "a";
+}
+.ico-project:before {
+  content: "b";
+}
+.ico-spinner:before {
+  content: "c";
+}
+.ico-edit-full:before {
+  content: "d";
+}
+.ico-trash-can:before {
+  content: "e";
+}
+.ico-backlog:before {
+  content: "f";
+}
+.ico-wiki:before {
+  content: "g";
+}
+.ico-delete:before {
+  content: "h";
+}
+.ico-admin:before {
+  content: "i";
+}
+.ico-edit-empty:before {
+  content: "j";
+}
+.ico-chart:before {
+  content: "k";
+}
+.ico-view:before {
+  content: "l";
+}
+.ico-user-story:before {
+  content: "m";
+}
+.ico-trello:before {
+  content: "n";
+}
+.ico-alert:before {
+  content: "o";
+}
+.ico-log-out:before {
+  content: "p";
+}
+.ico-run:before {
+  content: "q";
+}
+.ico-iocaine:before {
+  content: "r";
+}
+.ico-tools:before {
+  content: "s";
+}
+.ico-added:before {
+  content: "t";
+}
+.ico-assigned-to:before {
+  content: "u";
+}
+.ico-calendar-big:before {
+  content: "v";
+}
+.ico-calendar-small:before {
+  content: "w";
+}
+.ico-update:before {
+  content: "x";
+}
+.ico-status:before {
+  content: "y";
+}
+.ico-attachments:before {
+  content: "z";
+}
+.ico-add:before {
+  content: "A";
+}
+.ico-show-up:before {
+  content: "B";
+}
+.ico-show-down:before {
+  content: "C";
+}
+.ico-user:before {
+  content: "D";
+}
+.ico-attach:before {
+  content: "E";
+}
+.ico-search:before {
+  content: "F";
+}
+.ico-breadcrumb-arrow:before {
+  content: "G";
+}
+.ico-terroristfontawesome-webfont:before {
+  content: "H";
+}
+.ico-closed:before {
+  content: "I";
+}
+.ico-flag:before {
+  content: "K";
+}
+.ico-requirement:before {
+  content: "J";
+}
+.ico-points:before {
+  content: "L";
+}
+.ico-tags:before {
+  content: "M";
+}
+.ico-ninja:before {
+  content: "N";
+}
+.ico-terrorist:before {
+  content: "H";
+}
+.ico-owner:before {
+  content: "O";
+}
+.ico-staff:before {
+  content: "P";
+}
+.ico-worker:before {
+  content: "Q";
+}
+.ico-camera:before {
+  content: "R";
+}
+.ico-document:before {
+  content: "S";
+}

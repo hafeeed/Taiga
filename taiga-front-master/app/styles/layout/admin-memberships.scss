@@ -1,0 +1,8 @@
+.admin-membership {
+    header {
+        @include clearfix;
+        a {
+            float: right;
+        }
+    }
+}

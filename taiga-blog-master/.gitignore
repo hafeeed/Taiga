@@ -1,0 +1,11 @@
+.sass-cache/
+output/
+cache/
+.*.sw*
+*.pid
+*.log
+*.pyc
+*.mo
+.\#*
+*.css
+*.css.map

@@ -1,0 +1,128 @@
+.button,
+%button {
+    @extend %medium;
+    @extend %title;
+    background: transparent;
+    border: 0;
+    color: $white;
+    display: inline-block;
+    padding: .4rem 2.5rem;
+    text-transform: uppercase;
+    transition: all .3s linear;
+    vertical-align: middle;
+    &:hover {
+        color: $white;
+        transition: all .3s linear;
+    }
+    &.loading {
+        span {
+            animation: loading .5s linear;
+        }
+    }
+    span {
+        color: $white;
+    }
+    .icon {
+        color: $white;
+        margin-right: .3rem;
+    }
+}
+
+.trans-button {
+    @extend %medium;
+    @extend %title;
+    @extend %button;
+    span,
+    .icon {
+        color: $blackish;
+        transition: color .2s linear;
+    }
+    &:hover,
+    &.active {
+        span,
+        .icon {
+            color: $green-taiga;
+        }
+    }
+}
+
+
+.submit-button {
+    width: 100%;
+}
+
+.button-green {
+    @extend %button;
+    background: $green-taiga;
+    &:hover,
+    &.active {
+        background: $fresh-taiga;
+    }
+}
+
+.button-gray {
+    @extend %button;
+    background: $gray;
+    &:hover,
+    &.active {
+        background: $fresh-taiga;
+        color: $white;
+    }
+}
+
+.button-blackish {
+    @extend %button;
+    background: $blackish;
+    color: $whitish;
+    &:hover {
+        background: $blackish;
+        color: $white;
+    }
+}
+
+.button-red {
+    @extend %button;
+    background: $red-light;
+    &:hover {
+        background: $red;
+        color: $white;
+    }
+    .icon {
+        color: $white;
+    }
+}
+
+.button-block {
+    background: $white;
+    color: $red;
+    &:hover {
+        background: $red-light;
+        color: $white;
+    }
+}
+
+.button-bulk {
+    @extend %button;
+    background: $green-taiga;
+    padding: .35rem .5rem;
+    .icon {
+        margin-right: 0;
+    }
+    &:hover {
+        background: $fresh-taiga;
+    }
+}
+
+.button-auth {
+    @extend %button;
+    background: $grayer;
+    .icon,
+    img {
+        @extend %large;
+        color: $white;
+        margin-right: .5rem;
+    }
+    &:hover {
+        background: $black;
+    }
+}

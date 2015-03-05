@@ -1,0 +1,156 @@
+Taiga documentation
+===================
+:toc: left
+:numbered:
+
+
+Introduction
+------------
+
+Free. Open Source. Powerful. _Taiga_ is a project management platform for startups
+and agile developers & designers who want a simple, beautiful tool that makes work
+truly enjoyable.
+
+
+Project Maturity
+----------------
+
+Because _Taiga_ is still a young project we consider it is currently in beta state.
+
+
+API
+---
+_Taiga_ has a complete REST API (the one used by the web app), check the full API
+documentation link:api.html[here].
+
+
+How it works
+------------
+
+_Taiga_ is made up of two components: link:https://github.com/taigaio/taiga-front[taiga-front]
+and link:https://github.com/taigaio/taiga-back[taiga-back]
+
+- *taiga-front* has the front related code built with *angularjs* and *coffescript*.
+  It can runs on any static file server like nginx.
+- *taiga-back* has the backend related code consisting of an api, built using *django*
+  and *python3*.
+
+_Taiga_ has some other modules, but they are optional and documented in other sections.
+
+
+Requirements
+------------
+
+This is a list of major _Taiga_ dependencies:
+
+Runtime:
+
+- Python 3.4
+- PostgreSQL >= 9.3
+- RabbitMQ (optional if you dont want async notifications)
+
+Compile time:
+
+- GCC & Development Headers
+- Ruby 2.1 (only for compile sass)
+- NodeJS 0.10 (with npm, gulp and bower for download dependencies and compile coffeescript)
+
+
+Installation Guide
+------------------
+
+This section details everything you need to know to get _Taiga_ up and running
+on both development and production environments.
+
+Setup production environment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+link:setup-production.html[This document contains the complete, step by step tutorial] of how
+to properly setup _Taiga_ for a low traffic production environment.
+
+Setup development environment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can view the complete documentation on how to link:setup-development.html[setup a proper
+development environment].
+
+Other ways to setup initial environment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Additional to traditional step by step manuals, _Taiga_ comes with a
+collection of provisioning scripts and Vagrant support, and the
+link:setup-alternatives.html[complete documentation of how to use them].
+
+
+How to contribute
+-----------------
+
+Because _Taiga_ is an open source project, we gratefully accept contributions in various forms.
+
+Examples of contributions include:
+
+- Code patches
+- link:#contrib-plugins[Code contrib plugins]
+- Improvements
+- Bug reports
+- Patch reviews
+
+Before starting to develope a big feature (intending to be included on the _Taiga_ code base), it is
+strongly recommended that you reach out to us on the link:http://groups.google.com/d/forum/taigaio[mailing list].
+
+Reporting bugs
+~~~~~~~~~~~~~~
+
+Before reporting a bug or requesting a new feature, please consider these general points:
+
+- Check that someone hasn't already filed the bug or feature request by searching our running custom
+  queries in the ticket tracker.
+- Check the right repository to use for report an issue: bugs related to UI should go to *taiga-front*,
+  if something is broken on the backend, an issue should be opened on *taiga-back* repository.
+- First ask on the link:http://groups.google.com/d/forum/taigaio[mailing list] first if you're not sure if
+  what you're seeing is a bug.
+- Don't use the github issues system to ask support questions. Use the
+  link:http://groups.google.com/d/forum/taigaio[mailing list] for that.
+- Don’t use the github issues for lengthy discussions, because they're likely to get lost. If a particular
+  ticket is controversial, please move the discussion to the
+  link:http://groups.google.com/d/forum/taigaio[mailing list].
+
+Community
+~~~~~~~~~
+
+link:http://groups.google.com/d/forum/taigaio[Taiga has a mailing list]. Feel free to join it
+and ask any questions you may have.
+
+To subscribe for announcements of releases, important changes and so on, please follow
+link:https://twitter.com/taigaio[@taigaio] on Twitter or read our link:https://blog.taiga.io[blog].
+
+Donations
+~~~~~~~~~
+
+We are grateful for your emails volunteering donations to _Taiga_. We feel comfortable accepting them under
+these conditions: The first is that we will only do so while we are in the current beta / pre-revenue stage
+and that whatever money is donated will go towards a bounty fund. Starting Q2 2015 we will be engaging
+much more actively with our community to help further the development of Taiga, and we will use these
+donations to reward people working alongside us.
+
+If you wish to make a donation to this Taiga fund, you can do so via link:http://www.paypal.com[PayPal]
+using the email: eposner@taiga.io
+
+[[contrib-plugins]]
+Contrib plugins
+---------------
+
+Taiga supports the inclusion of contrib plugins, each plugin has its own
+documentation and repository. The current supported plugins are:
+
+* link:http://github.com/taigaio/taiga-contrib-gogs[taiga-contrib-gogs]: Gogs integration
+* link:http://github.com/taigaio/taiga-contrib-slack[taiga-contrib-slack]: Slack integration
+* link:http://github.com/taigaio/taiga-contrib-hall[taiga-contrib-hall]: Hall.com integration
+
+License
+-------
+
+Every code patch accepted in the Taiga codebase is accepted under the AGPL v3.0 license. It is important that you
+not include any code which cannot be licensed under AGPL v3.0.
+
+You can see the complete license in the `LICENSE` file in the root of repository.

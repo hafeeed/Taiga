@@ -1,0 +1,18 @@
+= Taiga migrator API client
+:linkcss:
+by Taiga
+:numbered:
+:testDir: ../test/groovy
+:sourceDir: ../main/groovy
+
+include::01_intro.ad[]
+
+include::02_authentication.ad[]
+
+include::03_projects.ad[]
+
+include::04_issues.ad[]
+
+include::05_wiki.ad[]
+
+include::06_release_notes.ad[]

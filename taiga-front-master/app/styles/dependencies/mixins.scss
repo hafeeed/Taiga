@@ -1,0 +1,77 @@
+@mixin ellipsis($width: 100px) {
+    max-width: $width;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@mixin box-shadow($h-shadow: 1px, $v-shadow: 1px, $blur: 15px, $spread: 6px, $color: rgba(0, 0, 0, .1)) {
+    box-shadow: $h-shadow $v-shadow $blur $spread $color;
+}
+
+@mixin clearfix {
+    &:after {
+        clear: both;
+        content: '';
+        display: table;
+    }
+}
+
+@mixin slide($max, $overflow, $min: 0) {
+    max-height: $min;
+    transition: max-height .5s ease-in;
+    overflow: #{$overflow};
+    &.open {
+        transition: max-height .5s ease-in;
+        max-height: $max;
+    }
+}
+
+@mixin background($red: 255, $green: 255, $blue: 255, $opacity: 1) {
+    background: rgba($red, $green, $blue, $opacity);
+}
+
+@mixin popover($width, $top: '', $left: '', $bottom: '', $right: '', $arrow-width: 0, $arrow-top: '', $arrow-left: '', $arrow-bottom: '', $arrow-height: 15px) {
+    @extend %text;
+    background: $blackish;
+    bottom: #{$bottom};
+    color: $white;
+    display: none;
+    left: #{$left};
+    list-style-type: none;
+    margin: 0;
+    padding: 10px;
+    position: absolute;
+    right: #{$right};
+    top: #{$top};
+    width: $width;
+    z-index: 99;
+    a {
+        @extend %small;
+        border-bottom: 1px solid $grayer;
+        color: $white;
+        display: block;
+        padding: 10px 2px;
+        &:last-child {
+            border: 0;
+        }
+        &:hover {
+            color: $fresh-taiga;
+            transition: color .3s linear;
+            &.point {
+                color: $white;
+            }
+        }
+    }
+    &:after {
+        background: $blackish;
+        bottom: #{$arrow-bottom};
+        content: '';
+        height: #{$arrow-height};
+        left: #{$arrow-left};
+        position: absolute;
+        top: #{$arrow-top};
+        transform: rotate(45deg);
+        width: #{$arrow-width};
+    }
+}

@@ -1,0 +1,13 @@
+div.wrapper(tg-kanban, ng-controller="KanbanController as ctrl"
+            ng-init="section='kanban'")
+    section.main.kanban
+        include ../includes/components/mainTitle
+        include ../includes/modules/kanban-table
+
+    div.lightbox.lightbox-generic-form.lb-create-edit-userstory(tg-lb-create-edit-userstory)
+        include ../includes/modules/lightbox-us-create-edit
+
+    div.lightbox.lightbox-generic-bulk(tg-lb-create-bulk-userstories)
+        include ../includes/modules/lightbox-us-bulk
+
+    div.lightbox.lightbox-select-user(tg-lb-assignedto)

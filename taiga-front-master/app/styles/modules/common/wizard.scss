@@ -1,0 +1,183 @@
+.wizard-create-project {
+    @extend %lightbox;
+    background: url('/images/invitation_bg.jpg') no-repeat center center;
+    background-size: cover;
+    color: $white;
+    text-align: center;
+    form {
+        width: 500px;
+    }
+    .title {
+        width: 100%;
+    }
+    h1,
+    p {
+        color: $white;
+    }
+    h1 {
+        line-height: 1.5rem;
+    }
+    p {
+        @extend %small;
+        opacity: .8;
+    }
+    input,
+    textarea,
+    select {
+        background: rgba($white, .7);
+        @include placeholder {
+            color: $grayer;
+        }
+    }
+    .close {
+        color: $white;
+        &:hover {
+            color: $red-light;
+        }
+    }
+    .wizard-step {
+        animation: formSlide .4s ease-in-out;
+        animation-direction: alternate-reverse;
+        display: none;
+        &.active {
+            animation: formSlide .4s ease-in-out;
+            &.create-step2,
+            &.create-step3,
+            &.create-step1 {
+                display: block;
+            }
+        }
+    }
+    .wizard-action {
+        div {
+            display: flex;
+        }
+        a {
+            color: $white;
+            display: inline-block;
+            flex-basis: 40%;
+            flex-grow: 1;
+            &:first-child {
+                margin-right: .5rem;
+            }
+        }
+    }
+    .create-step1 {
+        .template-inner {
+            display: flex;
+        }
+        fieldset {
+            flex-grow: 1;
+            &:first-child {
+                margin-right: .5rem;
+            }
+        }
+        input {
+            display: none;
+        }
+        input:checked {
+            +label {
+                background: rgba($fresh-taiga, .7);
+                transition: background .3s ease-in;
+            }
+        }
+        input+label {
+            background: rgba($whitish, .7);
+            cursor: pointer;
+            display: block;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            text-align: center;
+            transition: background .3s ease-in;
+            &:hover {
+                background: rgba($green-taiga, .7);
+                transition: background .3s ease-in;
+            }
+            .icon {
+                @extend %xxlarge;
+                color: $white;
+            }
+        }
+        h2 {
+            color: $white;
+            margin: 0;
+            margin-top: .5rem;
+            text-transform: uppercase;
+        }
+        p {
+            text-align: center;
+        }
+    }
+    .progress-bar {
+        bottom: 0;
+        height: .5rem;
+        left: 0;
+        position: absolute;
+        width: 100%;
+    }
+    .step1 {
+        .bar {
+            transition: width .6s ease-in-out;
+            width: 25%;
+        }
+        .progress-state {
+            span:nth-child(1) {
+                color: rgba($white, 1);
+                transition: color .3s ease-in-out;
+                transition-delay: .6s;
+            }
+        }
+    }
+    .step2 {
+        .bar {
+            transition: width .6s ease-in-out;
+            // width: 50%;
+            width: 75%;
+        }
+        .progress-state {
+            span:nth-child(1),
+            span:nth-child(2) {
+                color: rgba($white, 1);
+                transition: color .3s ease-in-out;
+                transition-delay: .6s;
+            }
+        }
+    }
+
+    .progress-state {
+        position: absolute;
+        width: 100%;
+        span {
+            color: rgba($white, .5);
+            display: inline-block;
+            margin-left: -100px;
+            position: absolute;
+            text-align: center;
+            top: -2rem;
+            transition: all 1s ease-in;
+            width: 200px;
+            &:nth-child(1) {
+                left: 25%;
+            }
+            &:nth-child(2) {
+                // left: 50%;
+                left: 75%;
+            }
+            // &:nth-child(3) {
+            //     left: 75%;
+            // }
+        }
+    }
+    .progress-bar-wrapper {
+        background: rgba($white, .3);
+        height: .5rem;
+    }
+    .bar {
+        background: rgba($fresh-taiga, .9);
+        height: .5rem;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 0;
+    }
+}

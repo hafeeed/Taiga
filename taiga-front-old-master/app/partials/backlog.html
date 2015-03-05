@@ -1,0 +1,461 @@
+<header class="header-container" ng-include="'/partials/header.html'"></header>
+<div class="middle-container backlog-content row-fluid">
+    <div class="span8" ng-controller="BacklogUserStoriesController as blCtrl">
+        <div class="graphics-container">
+            <div class="user-story-stats" url="">
+                <div class="progress-box">
+                    <div class="progress progress-success">
+                        <div class="bar" style="width: {{ percentageBarCompleted| number:1 }}%; background: {{ backgroundBar }};"></div>
+                    </div>
+                    <div class="progress-indicator indicator">{{ percentageClosedPoints|number:1 }}%</div>
+                    <div class="progress-help help" i18next="backlog.completed">completed</div>
+                </div>
+                <div class="stats-box">
+                    <div class="item">
+                        <div class="indicator">{{ projectStats.total_points }}</div>
+                        <div class="help" i18next="backlog.project-points">project points</div>
+                    </div>
+
+                    <div class="item with-popover"
+                         gm-template-popover="project-defined-points-popover"
+                         gm-popover-model="projectStats">
+                        <div class="indicator">{{ projectStats.defined_points }}</div>
+                        <div class="help" i18next="backlog.defined-points">defined points</div>
+                    </div>
+
+                    <div class="item with-popover"
+                         gm-template-popover="project-assigned-points-popover"
+                         gm-popover-model="projectStats">
+                        <div class="indicator">{{ projectStats.assigned_points }}</div>
+                        <div class="help" i18next="backlog.assigned-points">assigned points</div>
+                    </div>
+
+                    <div class="item with-popover"
+                         gm-template-popover="project-closed-points-popover"
+                         gm-popover-model="projectStats">
+                        <div class="indicator">{{ projectStats.closed_points }}</div>
+                        <div class="help" i18next="backlog.closed-points">closed points</div>
+                    </div>
+                </div>
+                <div class="us-story-container" ng-mouseleave="usDropdown=false">
+                    <a ng-class="{active: usDropdown}" ng-click="usDropdown=!usDropdown" class="new-us-story" data-icon="B"
+                        i18next="backlog.new-user-story">New user story</a>
+                    <ul class="us-story-dropdown" ng-show="usDropdown" ng-mouseleave="usDropdown=false">
+                        <li>
+                            <a ng-click="blCtrl.openCreateUserStoryForm()" i18next="backlog.new-user-story">
+                                New user story
+                            </a>
+                        </li>
+                        <li>
+                            <a ng-click="blCtrl.openBulkUserStoriesForm()" i18next="backlog.bulk-user-stories">
+                                Bulk user stories
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="graph-box">
+                <div id="graphs">
+                    <div id="burndown" gm-backlog-graph></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="filters-container">
+            <div class="filters-bar-sbox">
+                <div class="title-sbox">
+                    <a data-icon="B" href="" ng-class="{active: filtersOpened}"
+                       ng-click="filtersOpened=!filtersOpened" i18next="backlog.filters">
+                       Filters
+                   </a>
+                </div>
+                <div class="tags-list-sbox">
+                    <div class="tag selected"
+                         ng-repeat="tag in blCtrl.selectedFilters track by tag.id"
+                         ng-click="blCtrl.toggleFilter(tag)" gm-colorize-tag="tag">
+                        <div class="name">{{ tag.name }}</div>
+                        <div class="count">{{ tag.count }}</div>
+                    </div>
+                </div>
+                <div class="filters-visual-box" ng-show="filtersOpened">
+                    <div class="tags-list-sbox">
+                        <div class="tag" ng-repeat="tag in blCtrl.filters.tags" ng-click="blCtrl.toggleFilter(tag)"
+                                ng-class="{selected: blCtrl.isFilterSelected(tag)}" gm-colorize-tag="tag">
+                            <div class="name">{{ tag.name }}</div>
+                            <div class="count">{{ tag.count }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="filters-selected-box"></div>
+        </div>
+
+        <div class="us-container">
+            <div class="us-table-list">
+                <div class="flex-header">
+                    <div class="us-title">
+                        <span i18next="backlog.user-story">User Story</span>
+                    </div>
+                    <div class="us-status"></div>
+                    <div class="us-points" i18next="backlog.points">Points</div>
+                    <div class="us-options"></div>
+                </div>
+                <div class="flex-header second">
+                    <!-- TODO
+                    <div class="us-check"></div>
+                    -->
+                    <div class="us-title">
+                        <div class="list-options">
+                            <div class="option">
+                                <input id="show_tags" type="checkbox" ng-model="showTags"></input>
+                                <label for="show_tags" i18next="backlog.show-tags">Show tags</label>
+                            </div>
+
+                            <div class="option refresh-option">
+                                <label for="refresh-backlog" ng-click="blCtrl.refreshBacklog()">Refresh</label>
+                                <a class="refresh-button" id="refresh-backlog" ng-class="{active: refreshing}" ng-click="blCtrl.refreshBacklog()" data-icon="x"></a>
+                            </div>
+                            <div class="option" ng-show="selectedUserStories">
+                                <a href="" class="add-selected-us" data-icon="A"
+                                   ng-click="blCtrl.moveSelectedUserStoriesToCurrentSprint()">
+                                     {{ 'backlog.selected-story-points'|i18next:{selectedStoryPoints: selectedStoryPoints} }}
+                                 </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="us-status" i18next="backlog.status">Status</div>
+                    <div class="us-points">
+                        <div ng-repeat="item in constants.computableRolesList" class="role-point">
+                            {{ item.name }}
+                        </div>
+                        <div class="role-point total" i18next="backlog.total"></div>
+                    </div>
+                    <div class="us-options" i18next="backlog.options">Options</div>
+                </div>
+                <div class="flex-body" gm-sortable="userstories"
+                    gm-sortable-selector=".us-item" gm-sortable-on-add="blCtrl.sortableOnAdd"
+                    gm-sortable-on-update="blCtrl.sortableOnUpdate" gm-sortable-item-name="us"
+                    gm-sortable-on-remove="blCtrl.sortableOnRemove" gm-doomline
+                    gm-doomline-element-selector="div.us-item"
+                    gm-doomline-watch="unassignedUs">
+                    <div class="us-item nga-us-item" ng-repeat="us in unassignedUs|onlyVisible"
+                        ng-class="{selected:us.selected}"
+                        ng-dblclick="blCtrl.openUserStory(projectSlug, us.ref)"
+                        ng-include="'/partials/backlog-us-row.html'">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="milestones span4" ng-controller="BacklogMilestonesController as mlsCtrl" ng-init="sprintFormOpened=false">
+        <div class="header-box">
+            <div class="title-sbox">
+                <div class="title">{{ project.total_milestones }}</div>
+                <div class="help" i18next="backlog.sprints-planned">sprints <br />planned</div>
+            </div>
+            <a href="" data-icon="q" class="button new-sprint"
+               ng-click="sprintFormOpened=!sprintFormOpened"
+               i18next="backlog.new-sprint">
+                New sprint
+            </a>
+        </div>
+
+        <div class="milestone-form-box nga-milestone" ng-show="sprintFormOpened">
+            <form action="" gm-checksley-form="mlsCtrl.sprintSubmit()">
+                <fieldset>
+                    <label for="name" i18next="backlog.sprint-name-label">Sprint name:</label>
+                    <input type="text" data-required="true" ng-model="form.name" name="name"
+                           i18next="placeholder:backlog.sprint-name-placeholder"
+                           placeholder="Sprint name..."></input>
+                </fieldset>
+
+                <fieldset>
+                    <div class="subfield">
+                        <label for="estimated_start" i18next="backlog.estimated-start">Estimated start:</label>
+                        <input type="text" gm-kalendae name="estimated_start"
+                               ng-model="form.estimated_start"></input>
+                    </div>
+                    <div class="subfield">
+                        <label for="estimated_finish" i18next="backlog.estimated-finish">Estimated finish</label>
+                        <input type="text" gm-kalendae name="estimated_finish"
+                               ng-model="form.estimated_finish"></input>
+                    </div>
+                </fieldset>
+                <div class="btn-group">
+                    <input type="submit" class="button button-success"
+                           gm-checksley-submit-button value="Save" i18next="value:backlog.save" />
+                    <a href="" class="button" ng-click="sprintFormOpened=false" i18next="backlog.close">Close</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="sprints-box">
+            <p class="sprints-box-title" i18next="backlog.sprints">Sprints</p>
+            <p class="empty" ng-show="milestones.length == 0" i18next="backlog.no-sprints">
+                There isn't Sprints. Create a new one.
+            </p>
+
+            <div class="sprint-sbox" ng-repeat="ml in milestones"
+                ng-class="{active: !ml.closed}"
+                ng-controller="BacklogMilestoneController as mlCtrl"
+                ng-mouseover="showEditOption=true"
+                ng-mouseout="showEditOption=false">
+                <div class="header">
+                    <div class="title">
+                        <a class="name" href="{{ urls.taskboardUrl(projectSlug, ml.slug) }}">
+                            {{ ml.name }}
+                        </a>
+                        <a class="edit" href="" ng-click="mlCtrl.showEditForm(ml.id)"
+                           ng-show="showEditOption" data-icon="d"></a>
+                        <span>{{ 'backlog.from-to'|i18next:{from: momentFormat(ml.estimated_start,"L"), to: momentFormat(ml.estimated_finish,"L")} }}</span>
+                    </div>
+                    <div class="stats">
+                        <div class="sprint-progress">
+                            <div class="progress progress-success">
+                                <div class="bar" style="width: {{ stats.percentage }}%"></div>
+                            </div>
+                            <div class="progress-indicator">{{ stats.percentage }}%</div>
+                        </div>
+                        <div class="sprint-status">
+                            <div class="item">
+                                <div class="indicator">{{ stats.total }}</div>
+                                <div class="help" i18next="backlog.sprint-total">total</div>
+                            </div>
+                            <div class="item">
+                                <div class="indicator">{{ stats.closed }}</div>
+                                <div class="help" i18next="backlog.sprint-closed">closed</div>
+                            </div>
+                        </div>
+                        <div class="us-viewer" ng-show="ml.closed" ng-switch="viewUSs">
+                           <a data-icon="C" class="show" href="" ng-switch-when="false"
+                               ng-click="mlCtrl.toggleViewUSs()" i18next="backlog.sprint-show-uss">
+                               Show USs
+                           </a>
+                           <a data-icon="B" class="hide" href="" ng-switch-default
+                              ng-click="mlCtrl.toggleViewUSs()" i18next="backlog.sprint-hide-uss">
+                               Hide USs
+                           </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="body">
+                    <div class="us-list" ng-hide="editFormOpened || !viewUSs">
+                        <div class="us-table-list">
+                            <div class="flex-body" gm-sortable="userstories" gm-sortable-selector=".us-item"
+                                 ng-model="milestones[$index].user_stories" gm-sortable-item-name="us"
+                                 gm-sortable-on-add="mlCtrl.sortableOnAdd" gm-sortable-on-update="mlCtrl.sortableOnUpdate"
+                                 gm-sortable-on-remove="mlCtrl.sortableOnRemove">
+                                <div class="us-item" ng-repeat="us in ml.user_stories|orderBy:'order'"
+                                     ng-dblclick="mlsCtrl.openUserStory(projectSlug, us.ref)" ng-include="'/partials/backlog-us-row.html'">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="milestone-edit-form-box" ng-show="editFormOpened">
+                    <form action="" gm-checksley-form="mlCtrl.submit()">
+                        <fieldset>
+                            <label i18next="backlog.sprint-name-label">Sprint name:</label>
+                            <input type="text" data-required="true" ng-model="ml.name"
+                                name="name" placeholder="Sprint name..."
+                                i18next="placeholder:backlog.sprint-name-placeholder"></input>
+                        </fieldset>
+
+                        <fieldset>
+                            <div class="subfield">
+                                <label i18next="backlog.estimated-start">Estimated start:</label>
+                                <input type="text" gm-kalendae data-required="true"
+                                       name="estimated_start"
+                                       ng-model="ml.estimated_start"></input>
+                            </div>
+                            <div class="subfield">
+                                <label i18next="backlog.estimated-finish">Estimated finish</label>
+                                <input type="text" gm-kalendae data-required="true"
+                                       name="estimated_finish"
+                                       ng-model="ml.estimated_finish"></input>
+                            </div>
+                            <div class="subfield checkbox">
+                                <input type="checkbox" id="closed_{{ ml.id }}" name="closed" ng-model="ml.closed"></input>
+                                <label for="closed_{{ ml.id }}" i18next="backlog.is-closed">Is closed</label>
+                            </div>
+                        </fieldset>
+                        <div class="btn-group">
+                            <input type="submit" class="button button-success"
+                                   gm-checksley-submit-button value="Save" i18next="value:backlog.save"/>
+                            <a href="" class="button" ng-click="mlCtrl.closeEditForm()" i18next="backlog.close">Close</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- user story form -->
+<div id="userstory-modalform"
+    gm-modal="user-story-form"
+    ng-show="formOpened"
+    ng-controller="BacklogUserStoryModalController as blUsModal">
+
+    <div class="new-us-modal modal">
+        <form class="inline-form us-form" gm-checksley-form="blUsModal.submit()">
+            <div class="modal-header" ng-switch on="context.type">
+                <h3 ng-switch-when="create" i18next="backlog.create-user-story">Create user story</h3>
+                <h3 ng-switch-when="edit" i18next="backlog.modify-user-story">Modify user story</h3>
+            </div>
+            <div class="modal-body">
+                <fieldset class="fieldset-row">
+                    <fieldset>
+                        <label i18next="backlog.subject">Subject</label>
+                        <input class="subject" type="text" ng-model="form.subject" data-required="true"
+                               name="subject" placeholder="A descriptive name..." data-maxlength="500"
+                               i18next="placeholder:backlog.subject-placeholder"></input>
+                    </fieldset>
+                </fieldset>
+                <div class="fieldset-row" gm-role-points-edition></div>
+                <div class="fieldset-row clearfix status-tags">
+                    <fieldset>
+                        <label i18next="backlog.status">Status</label>
+                        <select class="status" name="status" ng-model="form.status"
+                            data-type="number" data-required="true"
+                            data-error-message="This field is required."
+                            ng-options="c.id as c.name for c in constants.usStatusesList|orderBy:'order'"
+                            i18next="data-error-message:field-required"
+                            ></select>
+                        </select>
+                    </fieldset>
+                    <fieldset>
+                        <label i18next="backlog.tags">Tags</label>
+                        <input type="text" name="tags"
+                               ng-model="form.tags" ui-select2="tagsSelectOptions"
+                               data-placeholder="{{'backlog.tags-placeholder'|i18next }}" />
+                    </fieldset>
+                </div>
+                <div class="fieldset-row requirements">
+                    <fieldset>
+                        <input type="checkbox" id="client-requirement" class="hidden"
+                               ng-model="form.client_requirement" name="client_requirement"/>
+                        <label for="client-requirement">
+                            <span data-icon="J" class="icon client-requirement"></span>
+                            <span i18next="backlog.client-requirement">Client Requirement</span>
+                        </label>
+                    </fieldset>
+                    <fieldset>
+                        <input type="checkbox"id="team-requirement" class="hidden"
+                               ng-model="form.team_requirement" name="team_requirement">
+                        <label for="team-requirement">
+                            <span data-icon="N" class="icon team-requirement"></span>
+                            <span i18next="backlog.team-requirement">Team Requirement</span>
+                        </label>
+                    </fieldset>
+                    <fieldset>
+                        <input type="checkbox"id="is-blocked" class="hidden"
+                               ng-model="form.is_blocked" name="is_blocked">
+                        <label for="is-blocked">
+                            <span data-icon="o" class="icon blocked"></span>
+                            <span i18next="backlog.is-blocked">Is blocked</span>
+                        </label>
+                    </fieldset>
+                </div>
+                <fieldset class="fieldset-row" ng-show="form.is_blocked">
+                    <label i18next="backlog.blocking-reasons">Reasons for blocking</label>
+                    <textarea class="blocked-note" name="blocked_note"
+                              placeholder="Some reasons..."
+                              i18next="placeholder:backlog.blocking-reasons-placeholder"
+                              ng-model="form.blocked_note" gm-markitup preview-id="blocked-preview"></textarea>
+                    <div id="blocked-preview" class="preview"></div>
+                </fieldset>
+                <fieldset class="fieldset-row">
+                    <label i18next="backlog.description">Description</label>
+                    <textarea class="description" name="description"
+                              placeholder="A good description..."
+                              i18next="placeholder:backlog.description-placeholder"
+                              ng-model="form.description" gm-markitup preview-id="preview"></textarea>
+                    <div id="preview" class="preview"></div>
+                </fieldset>
+            </div>
+            <div class="modal-footer">
+                <div gm-spinner class="spinner-container"></div>
+                <input type="submit" class="button button-success"
+                       gm-checksley-submit-button value="Save" i18next="value:backlog.save" />
+                <a href="" class="button button-cancel" ng-click="blUsModal.close()" i18next="backlog.close">Close</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- user story form -->
+<div id="bulk-user-stories-modalform"
+    gm-modal="bulk-user-stories-form"
+    ng-show="formOpened"
+    ng-controller="BacklogBulkUserStoriesModalController as blBulkModal">
+
+    <div class="bulk-us-modal modal">
+        <form class="inline-form us-form" gm-checksley-form="blBulkModal.submit()">
+            <div class="modal-header" ng-switch on="context.type">
+                <h3 i18next="backlog.bulk-user-stories">Create a bulk of USs</h3>
+            </div>
+            <div class="modal-body">
+                <fieldset class="fieldset-row">
+                    <fieldset>
+                        <textarea ng-model="form.bulkStories" data-required="true"
+                            placeholder="One user story per line..." rows="20"
+                            i18next="placeholder:backlog.user-story-per-line"></textarea>
+                    </fieldset>
+                </fieldset>
+            <div class="modal-footer">
+                <div gm-spinner class="spinner-container"></div>
+                <input type="submit" class="button button-success"
+                       gm-checksley-submit-button value="Save" i18next="value:backlog.save" />
+                <a href="" class="button button-cancel" ng-click="blBulkModal.close()" i18next="backlog.close">Close</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Template popovers -->
+
+<script type="text/ng-template" id="project-defined-points-popover">
+    <div class="project-defined-points-popover btn-accept">
+        <ul>
+            <li ng-repeat="role in constants.computableRolesList">
+                <span>{{  role.name }}:</span> {{ projectStats.defined_points_per_role[role.id] || 0 }}
+            </li>
+        </ul>
+    </div>
+</script>
+
+<script type="text/ng-template" id="project-assigned-points-popover">
+    <div class="project-assigned-points-popover btn-accept">
+        <ul>
+            <li ng-repeat="role in constants.computableRolesList">
+                <span>{{  role.name }}:</span> {{ projectStats.assigned_points_per_role[role.id] || 0 }}
+            </li>
+        </ul>
+    </div>
+</script>
+
+<script type="text/ng-template" id="project-closed-points-popover">
+    <div class="project-closed-points-popover btn-accept">
+        <ul>
+            <li ng-repeat="role in constants.computableRolesList">
+                <span>{{  role.name }}:</span> {{ projectStats.closed_points_per_role[role.id] || 0 }}
+            </li>
+        </ul>
+    </div>
+</script>
+
+<script type="text/ng-template" id="us-preview-popover">
+    <div class="us-preview-popover btn-accept">
+        <section>
+            <strong i18next="backlog.subject-popover">Subject:</strong><br />{{ us.subject }}
+        </section>
+        <section>
+            <strong i18next="backlog.description-popover">Description:</strong>
+            <div ng-bind-html="us.description_html"></div>
+        </section>
+    </div>
+</script>
+

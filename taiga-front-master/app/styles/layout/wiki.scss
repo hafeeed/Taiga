@@ -1,0 +1,70 @@
+.wiki {
+    .remove {
+        @extend %small;
+        color: $gray-light;
+        &:hover {
+            span {
+                color: $grayer;
+                transition: color .2s linear;
+            }
+            .icon {
+                color: $red;
+                transition: color .2s linear;
+            }
+        }
+        .icon {
+            color: $gray-light;
+            margin-right: .2rem;
+        }
+    }
+}
+
+.wiki-content {
+    margin-bottom: 2rem;
+    position: relative;
+    .view-wiki-content {
+        &:hover {
+            .wysiwyg {
+                background: $whitish;
+                cursor: pointer;
+            }
+            .edit {
+                opacity: 1;
+                top: -1.5rem;
+                transition: all .2s linear;
+            }
+        }
+        .edit {
+            background: $whitish;
+            left: 0;
+            opacity: 0;
+            padding: .2rem .5rem;
+            position: absolute;
+            top: 0;
+            transition: all .2s linear;
+        }
+    }
+    .edit-wiki-content {
+        .icon {
+            &:hover {
+                color: $grayer;
+                opacity: .3;
+                transition: all .2s linear;
+            }
+        }
+        .preview-icon {
+            position: absolute;
+            right: 3.5rem;
+        }
+        .action-container {
+            position: absolute;
+            right: 1rem;
+            top: .3rem;
+        }
+        .edit {
+            position: absolute;
+            right: 3.5rem;
+            top: .4rem;
+        }
+    }
+}

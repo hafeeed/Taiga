@@ -1,0 +1,52 @@
+body {
+    width: 800px;
+}
+
+.button {
+    @extend %medium;
+    @extend %title;
+    display: inline-block;
+    padding: 7px 40px 6px;
+    text-transform: uppercase;
+    -webkit-transition: background .3s linear;
+    transition: background .3s linear;
+    &:hover {
+        -webkit-transition: background .3s linear;
+        transition: background .3s linear;
+    }
+    .icon {
+        margin-right: .3rem;
+    }
+}
+
+a.button-green {
+    background: $green-taiga;
+    color: $white;
+    vertical-align: middle;
+    &:hover,
+    &.active {
+        background: $fresh-taiga;
+    }
+    span {
+        color: $white;
+    }
+}
+
+.button-gray,
+a.button-gray {
+    background: $button-gray;
+    &:hover {
+        background: $button-gray-hover;
+        color: $white;
+    }
+    span {
+        color: $white;
+    }
+}
+
+h1 {
+    @extend %title;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}

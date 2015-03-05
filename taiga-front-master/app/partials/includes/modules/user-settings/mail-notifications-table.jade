@@ -1,0 +1,12 @@
+section.policy-table
+    div.policy-table-header
+        div.policy-table-row
+            div.policy-table-project
+                span Project
+            div.policy-table-all
+                span Receive All
+            div.policy-table-involved
+                span Only Involved
+            div.policy-table-none
+                span No notifications
+    div.policy-table-body(tg-user-notifications-list, ng-model="notifyPolicies")

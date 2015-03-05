@@ -1,0 +1,73 @@
+.login-main {
+    @extend %triangled-bg;
+    align-items: center;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 999;
+    fieldset {
+        margin-bottom: .5rem;
+    }
+    .login-container {
+        flex-basis: 400px;
+    }
+    .logo-svg {
+        padding: 0 33%;
+        text-align: center;
+        width: 100%;
+    }
+    .logo {
+        @extend %xxlarge;
+        @extend %title;
+        color: $white;
+        margin-bottom: 1rem;
+        text-align: center;
+
+    }
+    .tagline {
+        @extend %xlarge;
+        @extend %title;
+        color: $white;
+        line-height: 2rem;
+        margin-bottom: 1rem;
+        text-align: center;
+        text-transform: uppercase;
+    }
+    form {
+        margin-bottom: 1rem;
+    }
+    input {
+        background: $white;
+        @include placeholder {
+            color: $gray-light;
+        }
+    }
+    .login-text,
+    .register-text {
+        text-align: center;
+        a:hover {
+            color: $fresh-taiga;
+        }
+    }
+    .button {
+        color: $white;
+        display: block;
+        text-align: center;
+    }
+    a {
+        &:hover {
+            color: $white;
+        }
+    }
+    .checksley-error-list {
+        right: 1rem;
+        +.forgot-pass {
+            display: none;
+        }
+    }
+}

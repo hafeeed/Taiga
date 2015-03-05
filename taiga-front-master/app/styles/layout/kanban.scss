@@ -1,0 +1,17 @@
+.kanban {
+    display: flex;
+    flex-direction: column;
+    max-height: 100vh;
+    header {
+        min-height: 70px;
+    }
+    .kanban-settings {
+        float: right;
+    }
+    .burndown-container {
+        display: none;
+    }
+    .list-filters {
+        margin-bottom: 1rem;
+    }
+}

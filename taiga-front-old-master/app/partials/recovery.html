@@ -1,0 +1,33 @@
+<div id="login">
+    <div class="center-box">
+        <div class="logo-box">
+            <a href="#/login">
+                <img src="/img/logo.png"></img>
+            </a>
+        </div>
+        <div class="form-container recovery-forms-box">
+            <form method="post" action="" gm-checksley-form="ctrl.submit()">
+                <fieldset>
+                    <div class="form-field">
+                        <label i18next="login.your-email">Your email</label>
+                        <input type="text" ng-model="formData.email" name="email"  data-type="email" />
+                    </div>
+                </fieldset>
+
+                <fieldset class="form-field clearfix">
+                    <input class="btn01" type="submit" value="Recover" gm-checksley-submit-button i18next="value:login.recover"/>
+                </fieldset>
+
+                <div class="login-message">
+                    <p class="loading" ng-show="!error && success">
+                        <span class="loading-ico"></span>
+                        <span i18next="login.recover-success">
+                            Email message sent successful.
+                        </span>
+                    </p>
+                    <p class="error" ng-show="error">{{ errorMessage }}</p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

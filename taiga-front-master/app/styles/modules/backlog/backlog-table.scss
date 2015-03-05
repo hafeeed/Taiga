@@ -1,0 +1,240 @@
+.backlog-table-header,
+.backlog-table-body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    &.show-tags {
+        .tags-block {
+            display: block;
+        }
+    }
+    .row {
+        @extend %small;
+        border-bottom: 1px solid $gray-light;
+        display: flex;
+        padding: .5rem 0 .5rem .5rem;
+        text-align: left;
+        width: 100%;
+    }
+    .backlog-table-title,
+    .backlog-table-subtitle,
+    .row {
+        &:hover {
+            background: transparent;
+        }
+        .user-stories {
+            overflow: hidden;
+            width: 100%;
+        }
+        .status {
+            flex-basis: 150px;
+            flex-grow: 0;
+            flex-shrink: 0;
+        }
+        .points {
+            flex-basis: 125px;
+            flex-grow: 0;
+        }
+
+    }
+    .status,
+    .points {
+        position: relative;
+        text-align: right;
+        .popover {
+            a {
+                text-align: left;
+                width: 100%;
+            }
+            .point {
+                text-align: center;
+            }
+        }
+        .icon {
+            color: $gray-light;
+            margin-left: .2rem;
+        }
+    }
+    .pop-status {
+        @include popover(200px, 0, 65%, '', '');
+        padding-right: 1rem;
+        &.fix {
+            bottom: 0;
+            top: auto;
+        }
+    }
+    .pop-role {
+        @include popover(200px, 0, 65%, '', '');
+        a {
+            &.active {
+                background: $fresh-taiga;
+                color: $white;
+            }
+        }
+    }
+    .pop-points {
+        @include popover(150px, '', 30px, 10px, '');
+        padding-right: 3rem;
+    }
+    .pop-points-open {
+        @include popover(200px, 0, 30px, '', '');
+        li {
+            display: inline-block;
+            width: 23%;
+        }
+        a {
+            display: block;
+            text-align: center;
+            &:hover,
+            &.active {
+                background: $fresh-taiga;
+                color: $white;
+            }
+        }
+    }
+}
+
+.backlog-table-header {
+    .backlog-table-title {
+        @extend %medium;
+        @extend %bold;
+        border-bottom: 2px solid $gray-light;
+        flex-wrap: nowrap;
+        padding-right: 30px;
+    }
+    .points {
+        cursor: pointer;
+    }
+    .header-points {
+        span {
+            color: $gray-light;
+        }
+    }
+}
+
+.backlog-table-body {
+    .row {
+        border-bottom: 1px solid darken($whitish, 4%);
+        cursor: move;
+        flex-wrap: nowrap;
+        position: relative;
+        &:hover {
+            background: lighten($green-taiga, 60%);
+            transition: background .2s ease-in;
+            .us-settings,
+            .icon-drag-v {
+                opacity: 1;
+                transition: all .2s ease-in;
+            }
+        }
+        &:last-child {
+            border-bottom: 0;
+        }
+        &.sortable-placeholder {
+            background: $whitish;
+            height: 40px;
+        }
+        &.ui-sortable-helper {
+            background: lighten($green-taiga, 60%);
+            box-shadow: 1px 1px 10px rgba($black, .1);
+            transition: background .2s ease-in;
+        }
+        .points {
+            .not-clickable:hover {
+                color: $black;
+                cursor: text;
+            }
+        }
+    }
+    .row-selected {
+        background: lighten($green-taiga, 60%);
+        transition: background .2s ease-in;
+    }
+    .user-story-name {
+        display: flex;
+        flex-wrap: nowrap;
+        input {
+            flex-shrink: 0;
+            margin-right: 1rem;
+            vertical-align: super;
+            &:checked+a {
+                color: $fresh-taiga;
+                transition: color .2s ease-in;
+            }
+        }
+        a {
+            display: inline-block;
+            flex-grow: 20;
+            max-width: 90%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+    .tags-block {
+        display: none;
+        margin-bottom: .3rem;
+        .tag {
+            @extend %small;
+            margin-right: .5rem;
+            padding: .2rem .5rem;
+        }
+    }
+    .blocked {
+        background: $red-light;
+        border-bottom: 1px solid $white;
+        color: $white;
+        &:hover {
+            background: $red;
+            transition: background .2s ease-in;
+        }
+        a {
+            color: $white !important;
+            &:hover {
+                color: $white;
+            }
+        }
+        .icon {
+            color: $white;
+            &:hover {
+                color: $white;
+            }
+        }
+    }
+    .doom-line {
+        background: $red;
+        margin: .2rem 0;
+        padding: .6rem 0;
+        position: relative;
+        width: 100%;
+        span {
+            @extend %small;
+            @extend %title;
+            color: $white;
+            position: absolute;
+            right: .5rem;
+            top: -3px;
+        }
+    }
+    .us-settings a,
+    .icon-drag-v {
+        @extend %large;
+        color: $gray-light;
+        transition: all .2s ease-in;
+        width: 30px;
+        &:hover {
+            color: $grayer;
+            transition: all .2s ease-in;
+        }
+    }
+    .us-settings {
+        flex-shrink: 0;
+        margin: 0 0 0 2rem;
+        opacity: 0;
+    }
+    .icon-drag-v {
+        cursor: move;
+        opacity: 0;
+        padding: .1rem .5rem 0 0;
+    }
+}

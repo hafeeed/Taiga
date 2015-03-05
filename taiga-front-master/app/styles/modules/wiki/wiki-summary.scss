@@ -1,0 +1,28 @@
+.wiki-summary {
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    div {
+        display: flex;
+        justify-content: space-between;
+        margin-right: 1rem;
+    }
+    .number {
+        line-height: 2rem;
+        top: 0;
+    }
+    .wiki-user-modification {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    figure {
+        margin-right: .3rem;
+        width: 32px;
+    }
+    .username {
+        @extend %large;
+        color: $fresh-taiga;
+        white-space: nowrap;
+    }
+}

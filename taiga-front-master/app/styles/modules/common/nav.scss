@@ -1,0 +1,108 @@
+.menu {
+    @extend %title;
+    background-image: url('../images/menu.png');
+    background-position: left bottom;
+    flex-wrap: wrap;
+    height: 100%;
+    padding: 0 .3rem;
+    position: fixed;
+    text-transform: uppercase;
+    width: 90px;
+    z-index: 999;
+}
+.logo-container {
+    cursor: pointer;
+    padding: 15px 15px 10px;
+    object,
+    img,
+    svg {
+        height: 50px;
+        width: 50px;
+    }
+    span {
+        @extend %large;
+        color: $white;
+        display: block;
+        margin-top: -5px;
+        text-align: center;
+    }
+    sup {
+        display: block;
+        line-height: 1rem;
+    }
+}
+
+.main-nav {
+    list-style: none;
+    padding: 0;
+    position: relative;
+    text-align: center;
+    li {
+        margin-bottom: 1rem;
+    }
+    a {
+        color: $white;
+        display: block;
+        text-align: center;
+        &:hover {
+            color: $fresh-taiga;
+            transition: color .3s linear;
+        }
+        span {
+            display: block;
+        }
+        .icon {
+            @extend %xlarge;
+            line-height: 2.2rem;
+        }
+        .item {
+            @extend %large;
+        }
+    }
+    .active {
+        color: $fresh-taiga;
+        transition: color .3s linear;
+    }
+}
+
+.user {
+    bottom: 1rem;
+    padding: 0 10px;
+    position: absolute;
+    width: 80px;
+    .popover {
+        @include popover(150px, '', 60px, 0, '', 15px, '', -6px, 25px);
+        a {
+            @extend %small;
+            color: $white;
+            text-align: left;
+            text-transform: none;
+            &:hover {
+                color: $fresh-taiga;
+                transition: color .2s linear;
+            }
+        }
+    }
+    img {
+        margin: 0 5px 10px;
+        width: 80%;
+        &:hover {
+            border-color: $fresh-taiga;
+            transition: border-color .3s linear;
+        }
+    }
+    .user-settings {
+        position: relative;
+    }
+    .settings {
+        text-align: center;
+        a {
+            color: $whitish;
+            margin-right: .5rem;
+            &:hover {
+                color: $fresh-taiga;
+                transition: color .3s linear;
+            }
+        }
+    }
+}

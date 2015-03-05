@@ -1,0 +1,92 @@
+.search-result-table {
+
+    .empty {
+        .title {
+            border: 0;
+        }
+    }
+
+    .row {
+        align-content: center;
+        align-items: center;
+        display: flex;
+        padding: .5rem;
+        &:hover {
+            background: lighten($green-taiga, 60%);
+            transition: background .2s ease-in;
+        }
+        .user-stories {
+            flex-basis: 0;
+            flex-grow: 5;
+            flex-shrink: 1;
+        }
+        .status,
+        .points {
+            flex-basis: 100px;
+            flex-grow: 1;
+            padding: 0 1rem;
+            text-align: center;
+        }
+        .assigned-to {
+            flex-basis: 250px;
+            flex-grow: 1;
+            padding: 0 1rem;
+        }
+    }
+    .row-selected {
+        background: lighten($green-taiga, 60%);
+        transition: background .2s ease-in;
+    }
+
+      // TODO: refactor xaviju
+    .user-story-name {
+        input {
+            vertical-align: top;
+        }
+        span {
+            display: inline-block;
+            max-width: 70%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .icon {
+            @extend %medium;
+            color: $gray-light;
+            &:hover {
+                color: $grayer;
+                transition: color .3s linear;
+            }
+        }
+    }
+    .title {
+        @extend %medium;
+        @extend %bold;
+        border-bottom: 1px solid $gray-light;
+        &:hover {
+            background: transparent;
+        }
+    }
+    .table-main {
+        @extend %small;
+        border-bottom: 1px solid $whitish;
+    }
+    .status,
+    .points {
+        position: relative;
+    }
+    .avatar {
+        align-items: center;
+        display: flex;
+        img {
+            flex-basis: 35px;
+        }
+        figcaption {
+            display: inline-block;
+            margin-left: .5rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+}

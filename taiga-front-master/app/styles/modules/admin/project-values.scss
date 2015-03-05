@@ -1,0 +1,75 @@
+.project-values-row {
+    align-items: center;
+    border-bottom: 1px solid $whitish;
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    div {
+        margin-left: 1rem;
+        position: relative;
+    }
+    .icon {
+        @extend %large;
+        color: $gray-light;
+        opacity: 0;
+        &:hover {
+            color: $grayer;
+            transition: all .2s ease-in;
+        }
+    }
+}
+
+.project-values-header {
+    @extend %bold;
+    border-bottom: 2px solid $gray-light;
+}
+.project-values-body {
+    .project-values-row {
+        &:hover {
+            background: lighten($green-taiga, 60%);
+            cursor: move;
+            transition: background .2s ease-in;
+            .icon {
+                opacity: 1;
+                transition: opacity .2s ease-in;
+            }
+        }
+    }
+}
+
+.project-values-name {
+    flex-basis: 0;
+    flex-grow: 3;
+}
+.project-values-value {
+    flex-basis: 0;
+    flex-grow: 1;
+    .checksley-error-list {
+        left: 0;
+        right: auto;
+        top: 35px;
+        white-space: nowrap;
+    }
+}
+
+.project-values-isclosed,
+.project-values-settings {
+    flex-basis: 0;
+    flex-grow: 1;
+    text-align: right;
+}
+
+.project-values-settings {
+    a {
+        @extend %large;
+        color: $gray;
+        margin-right: .5rem;
+        &:hover {
+            color: $green-taiga;
+            transition: color .3s linear;
+            .icon-delete {
+                color: $red;
+            }
+        }
+    }
+}

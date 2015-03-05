@@ -1,0 +1,17 @@
+*.swp
+*.pyc
+app/index.html
+index.html
+app/coffee/locale.*.coffee
+app/js/extern.min.js
+app/js/taiga.min.js
+app/less/style.css
+app/components
+node_modules
+coverage
+app/dist/*
+app/coffee/config.coffee
+.venv
+test/tests.js
+test/e2etests.js
+tags

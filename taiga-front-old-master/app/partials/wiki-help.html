@@ -1,0 +1,604 @@
+<header class="header-container" ng-include="'/partials/header.html'"></header>
+<div class="middle-container container-fluid wiki">
+    <div class="row-fluid" ng-show="!formOpened">
+        <div class="span12">
+            <div class="wiki-container">
+    <h1>Wiki Syntax documentation</h1>
+
+    <h2>Phrase Emphasis</h2>
+
+    <div class="codehilite">
+      <pre>
+<span class="o">**</span><span class="n">bold</span><span class="o">**</span> <span class="n">__bold__</span>
+</pre>
+    </div>
+
+    <p><strong>bold</strong> <strong>bold</strong></p>
+
+    <div class="codehilite">
+      <pre>
+<span class="n">_italic_</span>   <span class="o">*</span><span class="n">italic</span><span class="o">*</span>
+</pre>
+    </div>
+
+    <p><em>italic</em> <em>italic</em></p>
+
+    <div class="codehilite">
+      <pre>
+<span class="o">~~</span><span class="n">strike</span><span class="o">~~</span>
+</pre>
+    </div>
+
+    <p><del>strike</del></p>
+
+    <h2>Links</h2>
+
+    <h3>Inline</h3>
+
+    <div class="codehilite">
+      <pre>
+<span class="n">An</span> <span class="p">[</span><span class="n">example</span><span class="p">](</span><span class=
+"n">http</span><span class="o">:</span><span class="c1">//url.com/ "Title")</span>
+</pre>
+    </div>
+
+    <p>An <a href="http://url.com/" title="Title">example</a></p>
+
+    <h3>Reference-style labels</h3>
+
+    <div class="codehilite">
+      <pre>
+<span class="n">An</span> <span class="p">[</span><span class="n">example</span><span class="p">][</span><span class=
+"n">id</span><span class="p">].</span> <span class="n">Then</span><span class="p">,</span> <span class=
+"n">anywhere</span>
+<span class="k">else</span> <span class="n">in</span> <span class="n">the</span> <span class="n">doc</span><span class=
+"p">,</span> <span class="n">define</span> <span class="n">the</span> <span class="n">link</span><span class=
+"o">:</span>
+
+  <span class="p">[</span><span class="n">id</span><span class="p">]</span><span class="o">:</span> <span class=
+"n">http</span><span class="o">:</span><span class="c1">//example.com/  "Title"</span>
+</pre>
+    </div>
+
+    <p>An <a href="/img/logo.png" title="Title">example</a>. Then, anywhere else in the doc, define the link:</p>
+
+    <h3>URL autolinking</h3>
+
+    <div class="codehilite">
+      <pre>
+<span class="n">Go</span> <span class="n">to</span> <span class="n">http</span><span class="o">:</span><span class=
+"c1">//example.com</span>
+</pre>
+    </div>
+
+    <p>Go to <a href="http://example.com">http://example.com</a></p>
+
+    <h3>Inter-page links</h3>
+
+    <div class="codehilite">
+      <pre>
+<span class="n">An</span> <span class="p">[</span><span class="n">example</span><span class="p">](</span><span class=
+"n">page</span><span class="o">-</span><span class="n">name</span><span class="o">-</span><span class=
+"n">in</span><span class="o">-</span><span class="n">slug</span><span class="o">-</span><span class=
+"n">format</span> <span class="s">"Page"</span><span class="p">)</span> <span class="n">of</span> <span class=
+"n">inter</span><span class="o">-</span><span class="n">page</span> <span class="n">link</span><span class="p">.</span>
+</pre>
+    </div>
+
+    <p>An <a href="page-name-in-slug-format" title="Page">example</a> of inter-page link.</p>
+
+    <h3>Links to Taiga objects</h3>
+
+    <pre>
+The task, issue or user story #1 link.
+    </pre>
+
+    <p>The task, issue or user story <a href="#1">#1</a> link.
+
+    <h2>Images</h2>
+
+    <h3>Inline</h3>
+
+    <div class="codehilite">
+      <pre>
+<span class="o">!</span><span class="p">[</span><span class="n">alt</span> <span class="n">text</span><span class=
+"p">](</span><span class="o">/</span><span class="n">img</span><span class="o">/</span><span class=
+"n">logo</span><span class="p">.</span><span class="n">png</span> <span class="s">"Title"</span><span class=
+"p">)</span>
+</pre>
+    </div>
+
+    <p><img alt="alt text" src="/img/logo.png" title="Title"></p>
+
+    <h3>Reference-style</h3>
+
+    <div class="codehilite">
+      <pre>
+<span class="o">!</span><span class="p">[</span><span class="n">alt</span> <span class="n">text</span><span class=
+"p">][</span><span class="kt">id</span><span class="p">]</span>
+
+<span class="p">[</span><span class="kt">id</span><span class="p">]</span><span class="o">:</span> <span class=
+"o">/</span><span class="n">img</span><span class="o">/</span><span class="n">logo</span><span class=
+"p">.</span><span class="n">png</span> <span class="s">"Title"</span>
+</pre>
+    </div>
+
+    <p><img alt="alt text" src="/img/logo.png" title="Title"></p>
+
+    <h3>Emoticons</h3>
+
+    <div class="codehilite">
+      <pre>
+<span class="n">An</span> <span class="n">example</span> <span class="n">emoticon</span> <span class=
+"o">:</span><span class="n">smile</span><span class="o">:</span>
+</pre>
+    </div>
+
+    <p>An example emoticon <img class="emoji" title="smile" alt="smile" height="20" width="20" src=
+    "http://localhost:8000/static/img/emojis/smile.png" align="top"></p>
+
+    <h2>Headers</h2>
+
+    <h3>Setext-style</h3>
+
+    <div class="codehilite">
+      <pre>
+    <span class="n">Header</span> <span class="mi">1</span>
+    <span class="o">========</span>
+
+    <span class="n">Header</span> <span class="mi">2</span>
+    <span class="o">--------</span>
+</pre>
+    </div>
+
+    <h3>atx-style (closing #'s are optional)</h3>
+
+    <div class="codehilite">
+      <pre>
+<span class="c"># Header 1 #</span>
+
+<span class="c">## Header 2 ##</span>
+
+<span class="c">### Header 3 ###</span>
+
+<span class="c">#### Header 4 ####</span>
+
+<span class="c">##### Header 5 #####</span>
+
+<span class="c">###### Header 6 ######</span>
+</pre>
+    </div>
+
+    <h2>Lists</h2>
+
+    <h3>Ordered, without paragraphs</h3>
+
+    <div class="codehilite">
+      <pre>
+<span class="mf">1.</span>  <span class="n">Foo</span>
+<span class="mf">2.</span>  <span class="n">Bar</span>
+</pre>
+    </div>
+
+    <ol>
+      <li>Foo</li>
+
+      <li>Bar</li>
+    </ol>
+
+    <h3>Unordered, with paragraphs</h3>
+
+    <div class="codehilite">
+      <pre>
+<span class="o">*</span>   <span class="n">A</span> <span class="n">list</span> <span class="n">item</span><span class=
+"p">.</span>
+
+    <span class="n">With</span> <span class="n">multiple</span> <span class="n">paragraphs</span><span class=
+"p">.</span>
+
+<span class="o">*</span>   <span class="n">Bar</span>
+</pre>
+    </div>
+
+    <ul>
+      <li>
+        <p>A list item.</p>
+
+        <p>With multiple paragraphs.</p>
+      </li>
+
+      <li>
+        <p>Bar</p>
+      </li>
+    </ul>
+
+    <h3>You can nest them</h3>
+
+    <div class="codehilite">
+      <pre>
+<span class="o">*</span>   <span class="n">Abacus</span>
+    <span class="o">*</span> <span class="n">answer</span>
+<span class="o">*</span>   <span class="n">Bubbles</span>
+    <span class="mf">1.</span>  <span class="n">bunk</span>
+    <span class="mf">2.</span>  <span class="n">bupkis</span>
+        <span class="o">*</span> <span class="n">BELITTLER</span>
+    <span class="mf">3.</span> <span class="n">burper</span>
+<span class="o">*</span>   <span class="n">Cunning</span>
+</pre>
+    </div>
+
+    <ul>
+      <li>Abacus
+
+        <ul>
+          <li>answer</li>
+        </ul>
+      </li>
+
+      <li>Bubbles
+
+        <ol>
+          <li>bunk</li>
+
+          <li>bupkis
+
+            <ul>
+              <li>BELITTLER</li>
+            </ul>
+          </li>
+
+          <li>burper</li>
+        </ol>
+      </li>
+
+      <li>Cunning</li>
+    </ul>
+
+    <h2>Tables</h2>
+
+    <p>This is a Tables.</p>
+
+    <div class="codehilite">
+      <pre>
+ <span class="n">Header</span> <span class="mi">1</span>  <span class="o">|</span> <span class=
+"n">Header</span> <span class="mi">2</span>
+<span class="o">----------</span> <span class="o">|</span> <span class="o">----------</span>
+<span class="n">Cell</span> <span class="mf">1.1</span>   <span class="o">|</span> <span class=
+"n">Cell</span> <span class="mf">1.2</span>
+<span class="n">Cell</span> <span class="mf">2.1</span>   <span class="o">|</span> <span class=
+"n">Cell</span> <span class="mf">2.2</span>
+</pre>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Header 1</th>
+
+          <th>Header 2</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>Cell 1.1</td>
+
+          <td>Cell 1.2</td>
+        </tr>
+
+        <tr>
+          <td>Cell 2.1</td>
+
+          <td>Cell 2.2</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Another example with extra pipes on the ends:</p>
+
+    <div class="codehilite">
+      <pre>
+<span class="o">|</span> <span class="n">Header</span> <span class="mi">1</span>  <span class="o">|</span> <span class=
+"n">Header</span> <span class="mi">2</span>  <span class="o">|</span>
+<span class="o">|----------</span> <span class="o">|</span> <span class="o">----------|</span>
+<span class="o">|</span> <span class="n">Cell</span> <span class="mf">1.1</span>  <span class="o">|</span> <span class=
+"n">Cell</span> <span class="mf">1.2</span>  <span class="o">|</span>
+<span class="o">|</span> <span class="n">Cell</span> <span class="mf">2.1</span>  <span class="o">|</span> <span class=
+"n">Cell</span> <span class="mf">2.2</span>  <span class="o">|</span>
+</pre>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Header 1</th>
+
+          <th>Header 2</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>Cell 1.1</td>
+
+          <td>Cell 1.2</td>
+        </tr>
+
+        <tr>
+          <td>Cell 2.1</td>
+
+          <td>Cell 2.2</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>An example with inline Markdown.</p>
+
+    <div class="codehilite">
+      <pre>
+<span class="o">|</span> <span class="n">Header</span> <span class="mi">1</span>  <span class="o">|</span> <span class=
+"n">Header</span> <span class="mi">2</span>  <span class="o">|</span>
+<span class="o">|----------</span> <span class="o">|</span> <span class="o">----------|</span>
+<span class="o">|</span> <span class="o">*</span><span class="n">Cell</span> <span class="mf">1.1</span><span class=
+"o">*</span>  <span class="o">|</span> <span class="n">http</span><span class="o">:</span><span class=
+"c1">//cell12.com  |</span>
+<span class="o">|</span> <span class="n">Cell</span> <span class="mf">2.1</span>  <span class="o">|</span> <span class=
+"o">~~</span><span class="n">Cell</span> <span class="mf">2.2</span><span class="o">~~</span>  <span class="o">|</span>
+</pre>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Header 1</th>
+
+          <th>Header 2</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td><em>Cell 1.1</em></td>
+
+          <td><a href="http://cell12.com">http://cell12.com</a></td>
+        </tr>
+
+        <tr>
+          <td>Cell 2.1</td>
+
+          <td>
+            <del>Cell 2.2</del>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Align columns</p>
+
+    <div class="codehilite">
+      <pre>
+<span class="p">|</span> <span class="nv">Header</span> <span class="m">1</span>      <span class=
+"p">|</span>     <span class="nv">Header</span> <span class="m">2</span>     <span class="p">|</span>     <span class=
+"nv">Header</span> <span class="m">3</span> <span class="p">|</span>
+<span class="p">|</span> <span class="p">:-</span><span class="s-Atom">-----------</span> <span class=
+"p">|</span> <span class="p">:-</span><span class="s-Atom">-------------:</span> <span class="p">|</span> <span class=
+"s-Atom">-----------:</span> <span class="p">|</span>
+<span class="p">|</span> <span class="nv">Cell</span> <span class="m">1</span><span class="p">.</span><span class=
+"m">1</span>      <span class="p">|</span>     <span class="nv">Cell</span> <span class="m">1</span><span class=
+"p">.</span><span class="m">2</span>     <span class="p">|</span>     <span class="nv">Cell</span> <span class=
+"m">1</span><span class="p">.</span><span class="m">3</span> <span class="p">|</span>
+<span class="p">|</span> <span class="nv">Cell</span> <span class="m">2</span><span class="p">.</span><span class=
+"m">1</span>      <span class="p">|</span>     <span class="nv">Cell</span> <span class="m">2</span><span class=
+"p">.</span><span class="m">2</span>     <span class="p">|</span>     <span class="nv">Cell</span> <span class=
+"m">2</span><span class="p">.</span><span class="m">3</span> <span class="p">|</span>
+</pre>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Header 1</th>
+
+          <th>Header 2</th>
+
+          <th>Header 3</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>Cell 1.1</td>
+
+          <td>Cell 1.2</td>
+
+          <td>Cell 1.3</td>
+        </tr>
+
+        <tr>
+          <td>Cell 2.1</td>
+
+          <td>Cell 2.2</td>
+
+          <td>Cell 2.3</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Blockquotes</h2>
+
+    <div class="codehilite">
+      <pre>
+<span class="o">&gt;</span> <span class="n">Email</span><span class="o">-</span><span class=
+"n">style</span> <span class="n">angle</span> <span class="n">brackets</span>
+<span class="o">&gt;</span> <span class="n">are</span> <span class="n">used</span> <span class=
+"k">for</span> <span class="n">blockquotes</span><span class="p">.</span>
+
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">And</span><span class="p">,</span> <span class=
+"n">they</span> <span class="n">can</span> <span class="n">be</span> <span class="n">nested</span><span class=
+"p">.</span>
+</pre>
+    </div>
+
+    <blockquote>
+      <p>Email-style angle brackets are used for blockquotes.</p>
+
+      <blockquote>
+        <p>And, they can be nested.</p>
+      </blockquote>
+    </blockquote>
+
+    <div class="codehilite">
+      <pre>
+<span class="o">&gt;</span> <span class="err">####</span> <span class="n">Headers</span> <span class=
+"n">in</span> <span class="n">blockquotes</span>
+<span class="o">&gt;</span> 
+<span class="o">&gt;</span> <span class="o">*</span> <span class="n">You</span> <span class="n">can</span> <span class=
+"n">quote</span> <span class="n">a</span> <span class="n">list</span><span class="p">.</span>
+<span class="o">&gt;</span> <span class="o">*</span> <span class="n">Etc</span><span class="p">.</span>
+</pre>
+    </div>
+
+    <blockquote>
+      <h4>Headers in blockquotes</h4>
+
+      <ul>
+        <li>You can quote a list.</li>
+
+        <li>Etc.</li>
+      </ul>
+    </blockquote>
+
+    <h2>Code Spans</h2>
+
+    <div class="codehilite">
+      <pre>
+<span class="err">``</span> <span class="n">spans</span> <span class="n">are</span> <span class="n">delimited</span>
+<span class="n">by</span> <span class="n">backticks</span><span class="p">.</span>
+
+<span class="n">You</span> <span class="n">can</span> <span class="n">include</span> <span class=
+"n">literal</span> <span class="n">backticks</span>
+<span class="n">like</span> <span class="err">``</span> <span class="err">`</span><span class=
+"n">this</span><span class="err">`</span> <span class="err">``</span><span class="p">.</span>
+</pre>
+    </div>
+
+    <p>`` spans are delimited by backticks.</p>
+
+    <p>You can include literal backticks like <code>`this`</code>.</p>
+
+    <h2>Preformatted Code Blocks</h2>
+
+    <h3>Auto highlight code block</h3>
+
+    <p>using backticks</p>
+
+    <div class="codehilite">
+      <pre>
+<span class="err">```</span>
+<span class="n">This</span> <span class="n">is</span> <span class="n">a</span> <span class="n">preformatted</span>
+<span class="n">code</span> <span class="n">block</span><span class="p">.</span>
+<span class="err">```</span>
+</pre>
+    </div>
+
+    <div class="codehilite">
+      <pre>
+<span class="n">This</span> <span class="n">is</span> <span class="n">a</span> <span class="n">preformatted</span>
+<span class="n">code</span> <span class="n">block</span><span class="p">.</span>
+</pre>
+    </div>
+
+    <p>or using tabs</p>
+
+    <div class="codehilite">
+      <pre>
+    <span class="n">This</span> <span class="n">is</span> <span class="n">a</span> <span class="n">preformatted</span>
+    <span class="n">code</span> <span class="n">block</span><span class="p">.</span>
+</pre>
+    </div>
+
+    <div class="codehilite">
+      <pre>
+<span class="n">This</span> <span class="n">is</span> <span class="n">a</span> <span class="n">preformatted</span>
+<span class="n">code</span> <span class="n">block</span><span class="p">.</span>
+</pre>
+    </div>
+
+    <h3>Specified highlight code block</h3>
+
+    <div class="codehilite">
+      <pre>
+<span class="err">```</span><span class="n">python</span>
+<span class="n">def</span> <span class="n">hello</span><span class="p">(</span><span class="n">world</span><span class=
+"p">)</span><span class="o">:</span>
+    <span class="n">pass</span>
+<span class="err">```</span>
+</pre>
+    </div>
+
+    <div class="codehilite">
+      <pre>
+<span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class=
+"n">world</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre>
+    </div>
+
+    <h2>Horizontal Rules</h2>
+
+    <p>Three or more dashes or asterisks:</p>
+
+    <div class="codehilite">
+      <pre>
+<span class="o">---</span>
+
+<span class="o">*</span> <span class="o">*</span> <span class="o">*</span>
+
+<span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span>
+</pre>
+    </div>
+    <hr>
+    <hr>
+    <hr>
+
+    <h2>Manual Line Breaks</h2>
+
+    <p>End a line with two or more spaces:</p>
+
+    <div class="codehilite">
+      <pre>
+<span class="n">Roses</span> <span class="n">are</span> <span class="n">red</span><span class="p">,</span>   
+<span class="n">Violets</span> <span class="n">are</span> <span class="n">blue</span><span class="p">.</span>
+</pre>
+    </div>
+
+    <p>Roses are red,<br>
+    Violets are blue.</p>
+
+    <h2>Autocompletion</h2>
+
+    <h3>Member</h3>
+
+    <p>Type <strong>@<em>text</em></strong> where <strong>@<em>text</em></strong> is part of the name, email or full
+    name of a member.</p>
+
+    <p>For example:</p>
+
+    <p><code>@taiga use</code></p>
+
+    <div class="codehilite">
+      <pre>
+<span class="n">_</span><span class="o">**</span><span class="err">@</span><span class="n">Taiga</span> <span class=
+"n">User</span><span class="o">**</span><span class="n">_</span>
+</pre>
+    </div>
+
+    <p><em><strong>@Taiga User</strong></em></p>
+
+    <h3>Emojii</h3>
+
+    <p>See <strong>Emoticons</strong> section.</p>
+            </div>
+        </div>
+    </div>
+</div>

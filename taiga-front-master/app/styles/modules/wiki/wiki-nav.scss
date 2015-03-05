@@ -1,0 +1,48 @@
+.wiki-nav {
+    li {
+        @extend %large;
+        @extend %title;
+        border-bottom: 1px solid #cdcdcd;
+        text-transform: uppercase;
+        &:hover {
+            .icon {
+                opacity: 1;
+                transition: opacity 1s linear;
+            }
+        }
+        a {
+            display: block;
+            padding: 1rem 0 1rem 1rem;
+            span {
+                cursor: pointer;
+            }
+        }
+        .icon {
+            color: $blackish;
+            float: right;
+            opacity: 0;
+            transition: opacity 1s linear;
+        }
+        input {
+            @extend %text;
+            @extend %medium;
+            background: $grayer;
+            color: $whitish;
+            @include placeholder {
+                color: $gray-light;
+            }
+        }
+        .loading {
+            margin: 0;
+            padding: 8px;
+            text-align: center;
+            width: 100%;
+        }
+    }
+    .add-button {
+        color: $white;
+        display: block;
+        margin-bottom: .5rem;
+        text-align: center;
+    }
+}

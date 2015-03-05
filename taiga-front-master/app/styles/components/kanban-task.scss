@@ -1,0 +1,221 @@
+.kanban-task {
+    background: $postit;
+    border: 1px solid $postit-hover;
+    box-shadow: none;
+    cursor: move;
+    margin: .2rem;
+    position: relative;
+    &:last-child {
+        margin-bottom: 0;
+    }
+    &:hover {
+        .icon-edit,
+        .icon-drag-h {
+            color: $postit-dark-hover;
+            display: block;
+            opacity: 1;
+            transition: color .3s linear, opacity .3s linear;
+        }
+    }
+    &.ui-sortable-helper {
+        box-shadow: 1px 1px 15px rgba($black, .4);
+        transition: box-shadow .3s linear;
+    }
+    &.ui-sortable-placeholder {
+        background: $grayer;
+    }
+    &.blocked {
+        background: $red;
+        border: 1px solid darken($red, 10%);
+        color: $white;
+        a,
+        span {
+            color: $white;
+        }
+    }
+    .kanban-tagline {
+        border-color: $postit-hover;
+        display: flex;
+        height: .6rem;
+    }
+    .kanban-tag {
+        border-top: .3rem solid $postit-hover;
+        flex-basis: 0;
+        flex-grow: 1;
+        height: .6rem;
+        z-index: 100;
+    }
+    .kanban-task-inner {
+        display: flex;
+        padding: .5rem;
+    }
+    .avatar-wrapper {
+        flex-basis: 55px;
+        flex-grow: 0;
+        flex-shrink: 0;
+        width: 55px;
+        img {
+            width: 100%;
+        }
+    }
+    .avatar {
+        a {
+            @extend %small;
+            text-align: center;
+        }
+        img {
+            margin: 0 auto;
+            &:hover {
+                border: 2px solid $green-taiga;
+                transition: border .3s linear;
+            }
+        }
+    }
+    .task-text {
+        @extend %small;
+        flex-grow: 1;
+        padding: 0 .5rem 0 .8rem;
+    }
+    .task-assigned {
+        color: $postit-dark-hover;
+        display: block;
+    }
+    .task-num {
+        color: $grayer;
+        margin-right: .3rem;
+    }
+    .task-name {
+        @extend %bold;
+    }
+    .icon-edit,
+    .icon-drag-h {
+        @extend %large;
+        color: $postit-hover;
+        opacity: 0;
+        position: absolute;
+        transition: opacity .2s linear;
+        &:hover {
+            color: darken($postit-hover, 15%);
+            transition: color .3s linear;
+        }
+    }
+}
+
+
+.kanban-task-maximized {
+    .task-archived {
+        background: darken($whitish, 5%);
+        padding: .5rem;
+        text-align: left;
+        transition: background .3s linear;
+        &:hover {
+            background: darken($whitish, 8%);
+            transition: background .3s linear;
+        }
+        .task-archived-text {
+            flex: 1;
+        }
+        span {
+            color: $gray-light;
+        }
+        p {
+            @extend %small;
+            color: $gray-light;
+            margin: 0;
+            &:last-child {
+                color: $gray;
+                margin: .5rem 0;
+                text-align: center;
+            }
+        }
+    }
+    .task-name {
+        word-wrap: break-word;
+    }
+    .icon-edit {
+        bottom: .2rem;
+        right: .5rem;
+    }
+    .icon-drag-h {
+        @extend %xlarge;
+        bottom: .2rem;
+        cursor: move;
+        right: 45%;
+    }
+    .task-points {
+        @extend %small;
+        color: darken($postit-hover, 15%);
+        margin: 0;
+        span {
+            display: inline-block;
+            &:first-child {
+                padding-right: .2rem;
+            }
+        }
+    }
+    .kanban-tag {
+        border-top: .3rem solid;
+    }
+}
+
+.kanban-task-minimized {
+    .kanban-task-inner {
+        padding: 0 .3rem;
+    }
+    .task-archived {
+        @extend %small;
+        background: darken($whitish, 5%);
+        padding: .3rem;
+        text-align: left;
+        .task-archived-text {
+            flex: 1;
+        }
+        span {
+            color: $gray-light;
+        }
+        .task-name {
+            display: inline-block;
+            max-width: 70%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        p {
+            color: $gray-light;
+            margin: 0;
+            &:last-child {
+                display: none;
+            }
+        }
+    }
+    .task-num {
+        vertical-align: top;
+    }
+    .task-name {
+        display: inline-block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 135px;
+    }
+    .task-points {
+        display: none;
+    }
+    .icon-edit,
+    .icon-drag-h {
+        top: 1.4rem;
+    }
+    .icon-edit {
+        bottom: .2rem;
+        right: 1rem;
+    }
+    .icon-drag-h {
+        @extend %medium;
+        cursor: move;
+        right: .1rem;
+        transform: rotate(90deg);
+    }
+    .kanban-tag {
+        border-top: .2rem solid;
+    }
+}

@@ -1,0 +1,33 @@
+.us-created-by {
+    display: flex;
+    margin-bottom: 1rem;
+    margin-top: .5rem;
+    position: relative;
+    .user-avatar {
+        flex-basis: 40px;
+        flex-grow: 0;
+        img {
+            border-radius: 8%;
+            width: 100%;
+        }
+    }
+    .created-by {
+        flex-basis: 70px;
+        flex-grow: 3;
+        margin-left: .5rem;
+        .created-title,
+        .created-date {
+            @extend %small;
+            color: $gray-light;
+            display: block;
+        }
+        .created-user {
+            @extend %large;
+            color: $green-taiga;
+            cursor: default;
+            &.editable {
+                cursor: pointer;
+            }
+        }
+    }
+}

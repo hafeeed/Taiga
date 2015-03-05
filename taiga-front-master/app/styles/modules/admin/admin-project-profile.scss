@@ -1,0 +1,65 @@
+.project-details {
+    form {
+        max-width: 700px;
+        width: 100%;
+    }
+    input,
+    textarea {
+        @extend %title;
+    }
+    fieldset {
+        margin-bottom: 1rem;
+    }
+    label {
+        @extend %title;
+        display: block;
+        margin-bottom: .2rem;
+    }
+    textarea {
+        height: 10rem;
+    }
+    .privacy-settings {
+        display: flex;
+        margin-bottom: 2rem;
+        div {
+            flex-basis: 0;
+            flex-grow: 1;
+            &:first-child {
+                margin-right: .5rem;
+            }
+        }
+        // TODO: This should change when public projects available
+        label {
+            @extend %title;
+            border: 1px solid $gray-light;
+            cursor: not-allowed;
+            display: block;
+            text-align: center;
+            transition: all .2s linear;
+            span {
+                color: $gray-light;
+            }
+            // &:hover {
+            //     border: 1px solid $fresh-taiga;
+            // }
+        }
+        input:checked+label {
+            background: $fresh-taiga;
+            border: 1px solid $fresh-taiga;
+            cursor: default;
+            span {
+                color: $white;
+            }
+        }
+    }
+    .button-green {
+        color: $white;
+        display: block;
+        text-align: center;
+    }
+    .delete-project {
+        @extend %small;
+        display: block;
+        margin-top: 1rem;
+    }
+}

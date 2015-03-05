@@ -1,0 +1,153 @@
+<header class="header-container" ng-include="'/partials/header.html'"></header>
+
+<main class="site-admin-view" ng-show="auth.is_site_owner || auth.is_site_staff">
+
+    <ul class="tabs clearfix">
+        <li class="userstory-tab" ng-class="{active: ctrl.isActive('data')}"
+            ng-click="ctrl.setActive('data')" i18next="admin-site.site-profile">
+            Site profile
+        </li>
+        <li class="userstory-tab" ng-class="{active: ctrl.isActive('memberships')}"
+            ng-click="ctrl.setActive('memberships')" i18next="admin-site.memberships">
+            Memberships
+        </li>
+        <li class="userstory-tab" ng-class="{active: ctrl.isActive('projects')}"
+            ng-click="ctrl.setActive('projects')" i18next="admin-site.projects">
+            Projects
+        </li>
+    </ul>
+
+    <div class="tab-container" ng-show="ctrl.isActive('data')">
+        <div class="update-form">
+            <form class="form-horizontal" gm-checksley-form="ctrl.submit()">
+                <fieldset class="site-public-register">
+                    <input type="checkbox" id="publicRegister" name="publicRegister" ng-model="currentSite.public_register" data-error-message="Required" />
+                    <label class="control-label" for="publicRegister" i18next="admin-site.public-register">Public register</label>
+                </fieldset>
+
+                <fieldset class="site-defaul-language">
+                    <label class="control-label" for="defaultLanguage" i18next="admin-site.default-language">Default language</label>
+                    <select type="text" id="defaultLanguage" name="defaultLanguage" ng-model="currentSite.default_language"
+                        ng-options="key as value for (key, value) in languageOptions">
+                        <option value="" i18next="admin-site.use-system-language">Use system language</option>
+                    </select>
+                </fieldset>
+
+                <fieldset class="site-submit" ng-show="auth.is_site_owner">
+                    <button type="submit" class="button button-edit" gm-checksley-submit-button i18next="admin-site.save">Save</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <div class="tab-container" ng-show="ctrl.isActive('memberships')">
+        <div class="site-members">
+            <div class="site-members-list" >
+                <table class="membership-list">
+                    <thead>
+                        <tr>
+                            <th class="user" i18next="admin-site.full-name">Full name</td>
+                            <th class="email" i18next="admin-site.email">Email</td>
+                            <th class="role" i18next="admin-site.role">Role</th>
+                            <th class="options" i18next="admin-site.actions">Actions</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="mbr in members">
+                            <td class="user"><span class="user" gm-colorize-user="constants.users[mbr.user]">{{ mbr.user.full_name }}</span></td>
+                            <td class="email"><span class="email">{{ mbr.user.email }}</span></td>
+                            <td class="role">
+                                <span class="role" ng-show="mbr.is_owner" i18next="admin-site.owner">Owner</span>
+                                <span class="role" ng-show="!mbr.is_owner && mbr.is_staff" i18next="admin-site.staff">Staff</span>
+                                <span class="role" ng-show="!mbr.is_owner && !mbr.is_staff" i18next="admin-site.normal-user">Normal user</span>
+                            </td>
+                            <td class="options">
+                                <div ng-hide="mbr.user.id == auth.id">
+                                    <span class="action" data-icon="O"
+                                        ng-class="{ active: mbr.is_owner }"
+                                        title="Set as owner"
+                                        i18next="title:admin-site.set-as-owner"
+                                        ng-click="ctrl.setMemberAs(mbr, 'owner')"></span>
+                                    <span class="action" data-icon="Q"
+                                        ng-class="{ active: !mbr.is_owner && mbr.is_staff }"
+                                        title="Set as staff"
+                                        i18next="title:admin-site.set-as-staff"
+                                        ng-click="ctrl.setMemberAs(mbr, 'staff')"></span>
+                                    <span class="action" data-icon="P"
+                                        ng-class="{ active: !mbr.is_owner && !mbr.is_staff }"
+                                        title="Set as normal user"
+                                        i18next="title:admin-site.set-as-normal-user"
+                                        ng-click="ctrl.setMemberAs(mbr, 'normal')"></span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="tab-container" ng-show="ctrl.isActive('projects')">
+        <div class="project-list-container">
+            <h3 data-icon="q" i18next="admin-site.projects">Projects</h3>
+            <div class="project-members-options">
+                <a href="" class="add-project" data-icon="A" title="Add project"
+                    ng-click="ctrl.openNewProjectForm()" i18next="title:admin-site.add-project,admin-site.add-project">Add project</a>
+            </div>
+            <div class="invitation-form">
+                <div class="add-member-form" ng-show="addProjectFormOpened">
+                    <h4 i18next="admin-site.add-new-project">Add new project</h4>
+                    <form gm-checksley-form="ctrl.submitProject()">
+                        <fieldset class="project-name">
+                            <label class="control-label" for="name" i18next="admin-site.name">Name</label>
+                            <input type="text" id="name" ng-model="newProjectName" data-required="true" />
+                        </fieldset>
+                        <fieldset class="project-description">
+                            <label class="control-label" for="description" i18next="admin-site.description">Description</label>
+                            <textarea id="description" ng-model="newProjectDescription" data-required="true"></textarea>
+                        </fieldset>
+                        <fieldset class="project-sprints">
+                            <label class="control-label" for="sprints" i18next="admin-site.sprints">Sprints</label>
+                            <input type="text" id="sprints" ng-model="newProjectSprints" data-required="true" data-type="digits"></input>
+                        </fieldset>
+                        <fieldset class="project-points">
+                            <label class="control-label" for="points" i18next="admin-site.points">Points</label>
+                            <input type="text" id="points" ng-model="newProjectPoints" data-required="true" data-type="digits"></input>
+                        </fieldset>
+                        <fieldset class="project-template">
+                            <label class="control-label" for="template" i18next="admin-site.template">Template</label>
+                            <select type="text" id="newProjectTemplate" name="newProjectTemplate" ng-model="newProjectTemplate"
+                                ng-options="template.slug as template.name for template in projectTemplates" gm-select-fix>
+                            </select>
+                        </fieldset>
+                        <fieldset>
+                            <button type="submit" class="button button-edit"
+                                gm-checksley-submit-button
+                                i18next="admin-site.add-project">
+                                Add project
+                            </button>
+                            <button class="button button-cancel"
+                                ng-click="ctrl.closeNewProjectForm()"
+                                i18next="admin-site.cancel">
+                                Cancel
+                            </button>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <ul class="project-list">
+                <li class="project" ng-repeat="pr in currentSite.projects">
+                    <a href="" data-icon="h" title="Delete project" i18next="title:admin-site.delete-project" ng-click="ctrl.deleteProject(pr)"></a>
+                    <a href="#/project/{{pr.slug}}/admin/main">{{ pr.name }}</a>
+                    [<a ng-click="ctrl.toggleCreateTemplateProjectForm(pr)" i18next="admin-site.create-template-from-project">Create template from project</a>]
+                    <form ng-submit="ctrl.createTemplateFromProject(pr)" ng-show="pr.createTemplateFormOpened" class="create-template-form">
+                        <label for="{{pr.id}}_templateName" i18next="admin-site.template-name">Template name</label>
+                        <input id="{{pr.id}}_templateName" name="templateName" ng-model="pr.templateName" />
+                        <label for="{{pr.id}}_templateDescription" i18next="admin-site.template-description">Template description</label>
+                        <textarea id="{{pr.id}}_templateDescription" name="templateDescription" ng-model="pr.templateDescription"></textarea>
+                        <input type="submit" value="create" i18next="value:admin-site.create" />
+                        <input type="button" value="cancel" i18next="value:admin-site.cancel" ng-click="ctrl.toggleCreateTemplateProjectForm(pr)" />
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</main>

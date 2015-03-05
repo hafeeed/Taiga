@@ -1,0 +1,37 @@
+div.feedback(tg-feedback)
+    a.logout(href="#") Logout
+
+    div(ng-show="showOkMessage")
+        div.notification-message.success
+           div.icon.icon-notification-success.icon-backlog
+           div.text
+               h4.warning Everything is ok
+
+        a.button.new-feedback.button-green(href="", title="New feedback") New feedback
+
+    div(ng-show="showErrorMessage")
+        div.notification-message.error
+           div.icon.icon-notification-success.icon-backlog
+           div.text
+               h4.warning Something went wrong
+
+        a.button.new-feedback.button-green(href="", title="Try again") Try again
+
+    div(ng-show="!showOkMessage && !showErrorMessage")
+        h1 Send feedback
+
+        form(ng-controller="FeedbackController as ctrl")
+            fieldset.image(ng-show="data.attached_file")
+                img(ng-src="{{data.attached_file}}")
+
+            fieldset
+                a.button.button-capture.button-gray(href="", title="Capture") Capture
+
+            fieldset
+                select(name="type", ng-model="data.type" ng-options="obj.id as obj.name for obj in feedbackTypes")
+
+            fieldset
+                textarea(name="description", ng-model="data.description", data-required="true", placeholder="feedback")
+
+            fieldset
+                a.button.button-submit.button-green(href="", title="Submit") Submit

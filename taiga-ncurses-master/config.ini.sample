@@ -1,0 +1,85 @@
+[main]
+    [[host]]
+        scheme = http
+        domain = localhost
+        port = 8000
+    [[site]]
+        domain = localhost
+    palette = default
+    [[keys]]
+        quit = q
+        debug = D
+        backlog = B
+        admin = A
+        milestone = M
+        projects = P
+        issues = I
+        wiki = W
+[backlog]
+    [[keys]]
+        move_to_milestone = m
+        edit = e
+        update_order = w
+        reload = r
+        increase_priority = K
+        decrease_priority = J
+        delete = delete
+        create = n
+        create_in_bulk = N
+        help = ?
+[milestone]
+    [[keys]]
+        edit = e
+        create_task = n
+        change_to_milestone = m
+        delete = delete
+        create_user_story = N
+        reload = r
+        help = ?
+[issues]
+    [[keys]]
+        edit = e
+        reload = r
+        create = n
+        delete = delete
+        help = ?
+        filters = f
+[palettes]
+    [[default]]
+        progressbar-complete-red = white, dark red
+        progressbar-smooth = dark green, dark gray
+        default = white, default
+        popup-submit-button = white, dark green
+        projects-button = black, dark green
+        progressbar-normal-red = black, dark gray, standout
+        green-bg = white, dark green
+        popup-selected = dark cyan, black
+        info = white, dark blue
+        error = white, dark red
+        progressbar-smooth-red = dark red, dark gray
+        submit-button = white, dark green
+        footer = black, black
+        progressbar-complete = white, dark green
+        cyan = dark cyan, default
+        footer-error = dark red, black
+        password-editor = "light red,underline", black
+        popup = white, dark gray
+        popup-cancel-button = black, light gray
+        yellow = yellow, default
+        magenta = light magenta, default
+        focus-header = black, dark green
+        popup-text-red = dark red, dark gray
+        account-button = black, dark green
+        progressbar-normal = black, dark gray, standout
+        footer-info = light blue, black
+        inactive-tab = white, default
+        focus = black, dark cyan
+        green = dark green, default
+        red = dark red, default
+        active-tab = white, dark blue
+        help-button = white, black
+        popup-editor = "white,underline", dark gray
+        popup-section-title = "white,underline,bold", dark gray
+        editor = "white,underline", black
+        popup-text-magenta = light magenta, dark gray
+        cancel-button = black, light gray

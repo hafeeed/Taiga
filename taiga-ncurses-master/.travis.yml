@@ -1,0 +1,16 @@
+language: python
+python:
+  - "3.3"
+# dependencies
+install:
+  - pip install -r dev-requirements.txt --use-mirrors
+script:
+  - coverage run --source=taiga_ncurses --omit='*tests*,*cli.py,*api*' -m py.test
+notifications:
+  email:
+    recipients:
+      - bameda@dbarragan.com
+    on_success: change
+    on_failure: change
+after_success:
+  - coveralls

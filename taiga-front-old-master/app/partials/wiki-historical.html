@@ -1,0 +1,38 @@
+<header class="header-container" ng-include="'/partials/header.html'"></header>
+<div class="middle-container container-fluid wiki">
+    <div class="row-fluid" ng-show="!formOpened">
+        <div class="span12">
+            <div class="wiki-container" ng-bind-html="page.html"></div>
+            <div class="attachments" ng-show="attachments">
+                <h3 data-icon="E" i18next="wiki-historical.attachments">Attachments</h3>
+                <ul class="attachments-items">
+                    <li class="attachments-item" ng-repeat="attachment in attachments">
+                        <a href="{{ attachment.url }}" target="_blank">{{ attachment.name }}</a>
+                        <span>[{{ attachment.size|sizeFormat }}]</span>
+                        <span>{{ "wiki-historical.on-date"|i18next:{date:momentFormat(attachment.created_date, 'LLLL')} }}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="last-update-info">
+                <span i18next="wiki-historical.last-update-by-history">
+                    Last updated by
+                </span>
+                <span iclass="user" gm-colorize-user="constants.users[currentVersion.user]">
+                    {{ constants.users[currentVersion.user].full_name }},
+                </span>
+                <span class="date">{{ currentVersion.created_date|momentFromNow }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="history">
+                <h3 i18next="wiki-historical.history">History</h3>
+                <div class="history-items-container">
+                    TODO: should be implemented new directive or use parametrized history directive
+                    when new design and layour are ready.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

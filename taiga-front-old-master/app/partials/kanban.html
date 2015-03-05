@@ -1,0 +1,261 @@
+<header class="header-container" ng-include="'/partials/header.html'"></header>
+
+<div class="middle-container filters-container">
+    <div class="filters-container">
+        <div class="filters-bar-sbox">
+            <div class="title-sbox">
+                <div class="title">
+                    <a data-icon="B" href="" ng-class="{active: filtersOpened}"
+                       ng-click="filtersOpened=!filtersOpened"
+                       i18next="issues.filters">
+                        Filters
+                    </a>
+                </div>
+
+                <div class="tags-list-sbox"
+                     gm-selected-filters-renderer="ctrl.selectedFilters"
+                     gm-toggle-filter-callback="ctrl.toggleFilter(tag)">
+                </div>
+            </div>
+            <ul class="filters-visual-box" ng-show="filtersOpened">
+                <li ng-show="ctrl.filters.statuses.length > 0">
+                    <h3 i18next="issues.status">Status:</h3>
+                    <div class="tags-list-sbox">
+                        <div class="tag" style="background-color: {{ tag.color }}"
+                             ng-repeat="tag in ctrl.filters.statuses"
+                             ng-click="ctrl.toggleFilter(tag)"
+                             ng-class="{selected: ctrl.isFilterSelected(tag)}">
+                            <div class="name">{{ tag.name }}</div>
+                            <div class="count">{{ tag.count }}</div>
+                        </div>
+                    </div>
+                </li>
+                <li ng-show="ctrl.filters.types.length > 0">
+                    <h3 i18next="issues.type">Type:</h3>
+                    <div class="tags-list-sbox">
+                        <div class="tag" style="background-color: {{ tag.color }}"
+                             ng-repeat="tag in ctrl.filters.types"
+                             ng-click="ctrl.toggleFilter(tag)"
+                             ng-class="{selected: ctrl.isFilterSelected(tag)}" >
+                            <div class="name">{{ tag.name }}</div>
+                            <div class="count">{{ tag.count }}</div>
+                        </div>
+                    </div>
+                </li>
+                <li ng-show="ctrl.filters.severities.length > 0">
+                    <h3 i18next="issues.severity">Severity:</h3>
+                    <div class="tags-list-sbox">
+                        <div class="tag" style="background-color: {{ tag.color }}"
+                             ng-repeat="tag in ctrl.filters.severities"
+                             ng-click="ctrl.toggleFilter(tag)"
+                             ng-class="{selected: ctrl.isFilterSelected(tag)}" >
+                            <div class="name">{{ tag.name }}</div>
+                            <div class="count">{{ tag.count }}</div>
+                        </div>
+                    </div>
+                </li>
+                <li ng-show="ctrl.filters.priorities.length > 0">
+                    <h3 i18next="issues.priority">Priority:</h3>
+                    <div class="tags-list-sbox">
+                        <div class="tag" style="background-color: {{ tag.color }}"
+                             ng-repeat="tag in ctrl.filters.priorities"
+                             ng-click="ctrl.toggleFilter(tag)"
+                             ng-class="{selected: ctrl.isFilterSelected(tag)}">
+                            <div class="name">{{ tag.name }}</div>
+                            <div class="count">{{ tag.count }}</div>
+                        </div>
+                    </div>
+                </li>
+                <li ng-show="ctrl.filters.assignedTo.length > 0">
+                    <h3 i18next="issues.assigned-to">Assigned to:</h3>
+                    <div class="tags-list-sbox">
+                        <div class="tag" ng-repeat="tag in ctrl.filters.assignedTo"
+                             ng-click="ctrl.toggleFilter(tag)"
+                             ng-class="{selected: ctrl.isFilterSelected(tag)}">
+                            <div class="name" gm-colorize-user="constants.users[tag.id]">
+                                {{ tag.name }}
+                            </div>
+                            <div class="count">{{ tag.count }}</div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <h3 i18next="issues.tags">Tags:</h3>
+                    <div class="tags-list-sbox">
+                        <div class="tag" ng-repeat="tag in ctrl.filters.tags track by $index"
+                             ng-click="ctrl.toggleFilter(tag)"
+                             ng-class="{selected: ctrl.isFilterSelected(tag)}" gm-colorize-tag="tag">
+                            <div class="name">{{ tag.name }}</div>
+                            <div class="count">{{ tag.count }}</div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="filters-selected-box"></div>
+    </div>
+</div>
+
+
+<div class="middle-container dashboard-content">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="kanban-container kanban" gm-kanban-size watch="userstories" min-width="250">
+                <table>
+                    <thead>
+                        <tr>
+                            <td class="" ng-repeat="status in constants.usStatusesList|orderBy:'order'"
+                                    style="border-right-color: {{ status.color }}">
+                                <div class="badge" style="background-color: {{ status.color }};">
+                                    {{ status.name }}
+                                    <a class="plus" ng-click="ctrl.openCreateUsForm(status.id)" data-icon="A"></a>
+                                </div>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="col-task-status col-task-{{ status.name|slugify }} tasks"
+                                    ng-repeat="status in constants.usStatusesList|orderBy:'order'"
+                                    gm-sortable="userstories"
+                                    gm-sortable-selector=".task-box"
+                                    gm-sortable-item-name="us" gm-sortable-on-add="ctrl.sortableOnAdd"
+                                    gm-sortable-on-update="ctrl.sortableOnUpdate"
+                                    gm-sortable-on-remove="ctrl.sortableOnRemove"
+                                    gm-kanban-wip="status.wip_limit" watch="ctrl.uss[status.id]"
+                                    gm-kanban-wip-element-selector=".task-box"
+                                    gm-kanban-wip-watch="userstories">
+
+                                <div class="task-box" ng-repeat="us in ctrl.uss[status.id]|onlyVisible">
+                                    <div ng-include="'/partials/kanban-us.html'"></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="kanban-us-modalform"
+     gm-modal="us-form"
+     ng-show="formOpened"
+     ng-controller="KanbanUsModalController as modalCtrl">
+
+    <div class="new-us-modal modal">
+        <form class="inline-form us-form" gm-checksley-form="modalCtrl.submit()">
+            <div class="modal-header" ng-switch on="context.type">
+                <h3 ng-switch-when="create" i18next="kanban.create-user-story">Create user story</h3>
+                <h3 ng-switch-when="edit" i18next="kanban.modify-user-story">Modify user story</h3>
+            </div>
+            <div class="modal-body">
+                <fieldset class="fieldset-row">
+                    <fieldset>
+                        <label i18next="kanban.subject">Subject</label>
+                        <input class="subject" type="text" ng-model="form.subject" data-required="true"
+                               name="subject" placeholder="A descriptive name..." data-maxlength="500"
+                               i18next="placeholder:kanban.subject-placeholder"></input>
+                    </fieldset>
+                </fieldset>
+                <div class="fieldset-row" gm-role-points-edition></div>
+                <div class="fieldset-row clearfix status-tags">
+                    <fieldset>
+                        <label i18next="kanban.status">Status</label>
+                        <select class="status" name="status" ng-model="form.status"
+                            data-type="number" data-required="true"
+                            data-error-message="This field is required."
+                            ng-options="c.id as c.name for c in constants.usStatusesList|orderBy:'order'"
+                            i18next="data-error-message:field-required"
+                            ></select>
+                        </select>
+                    </fieldset>
+                    <fieldset>
+                        <label for="assigned_to" i18next="kanban.assigned-to">Assigned to</label>
+                        <select name="assigned_to"
+                                ng-model="form.assigned_to"
+                                ui-select2="assignedToSelectOptions">
+                            <option value="" i18next="task.unassigned">Unassigned</option>
+                            <option ng-repeat="m in project.active_memberships" value="{{ m.user }}">
+                                {{ m.full_name }}
+                            </option>
+                        </select>
+                    </fieldset>
+                </div>
+                <div class="fieldset-row requirements">
+                    <fieldset>
+                        <input type="checkbox" id="client-requirement" class="hidden"
+                               ng-model="form.client_requirement" name="client_requirement"/>
+                        <label for="client-requirement">
+                            <span data-icon="J" class="icon client-requirement"></span>
+                            <span i18next="kanban.client-requirement">Client Requirement</span>
+                        </label>
+                    </fieldset>
+                    <fieldset>
+                        <input type="checkbox"id="team-requirement" class="hidden"
+                               ng-model="form.team_requirement" name="team_requirement">
+                        <label for="team-requirement">
+                            <span data-icon="N" class="icon team-requirement"></span>
+                            <span i18next="kanban.team-requirement">Team Requirement</span>
+                        </label>
+                    </fieldset>
+                    <fieldset>
+                        <input type="checkbox"id="is-blocked" class="hidden"
+                               ng-model="form.is_blocked" name="is_blocked">
+                        <label for="is-blocked">
+                            <span data-icon="o" class="icon blocked"></span>
+                            <span i18next="kanban.is-blocked">Is blocked</span>
+                        </label>
+                    </fieldset>
+                </div>
+                <fieldset class="fieldset-row" ng-show="form.is_blocked">
+                    <label i18next="kanban.blocking-reasons">Reasons for blocking</label>
+                    <textarea class="blocked-note" name="blocked_note"
+                              placeholder="Some reasons..."
+                              i18next="placeholder:kanban.blocking-reasons-placeholder"
+                              ng-model="form.blocked_note" gm-markitup preview-id="blocked-preview"></textarea>
+                    <div id="blocked-preview" class="preview"></div>
+                </fieldset>
+                <fieldset class="fieldset-row">
+                    <label i18next="kanban.tags">Tags</label>
+                    <input type="text" name="tags"
+                           ng-model="form.tags" ui-select2="tagsSelectOptions"
+                           data-placeholder="{{'kanban.tags-placeholder'|i18next }}" />
+                </fieldset>
+                <fieldset class="fieldset-row">
+                    <label i18next="kanban.description">Description</label>
+                    <textarea class="description" name="description"
+                              placeholder="A good description..."
+                              i18next="placeholder:kanban.description-placeholder"
+                              ng-model="form.description" gm-markitup preview-id="preview"></textarea>
+                    <div id="preview" class="preview"></div>
+                </fieldset>
+            </div>
+            <div class="modal-footer">
+                <div gm-spinner class="spinner-container"></div>
+                <input type="submit" class="button button-success"
+                       gm-checksley-submit-button value="Save" i18next="value:kanban.save" />
+                <a href="" class="button button-cancel" ng-click="modalCtrl.close()" i18next="kanban.close">Close</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/ng-template" id="points-for-role">
+    <div class="points-per-role-popover btn-accept">
+        <ul class="us-points-per-role">
+            <li ng-repeat="role in constants.computableRolesList" class="us-point">
+                {{ role.name }}: {{ constants.points[us.points[role.id]].name }}
+            </li>
+        </ul>
+    </div>
+</script>
+
+<script type="text/template" id="us-blocked-popover">
+    <div class="us-blocked-popover">
+        <section>
+            <strong i18next="kanban.blocking-reasons-popover">reasons of blocking:</strong>
+            <div gm-render-markdown="us.blocked_note"></div>
+        </section>
+    </div>
+</script>

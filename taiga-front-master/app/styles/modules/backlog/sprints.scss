@@ -1,0 +1,230 @@
+.sprints {
+    .summary {
+        background: darken($whitish, 10%);
+        display: flex;
+        justify-content: space-between;
+    }
+    .total-sprints {
+        align-items: flex-start;
+        color: $grayer;
+        display: flex;
+    }
+    .add-sprint {
+        margin: 0;
+        padding: .3rem 1.5rem;
+    }
+    .filter-closed-sprints {
+        @extend %small;
+        align-content: center;
+        display: flex;
+        justify-content: center;
+        padding-bottom: 1rem;
+        vertical-align: middle;
+        .icon-archive {
+            margin-right: .3rem;
+        }
+    }
+    .loading {
+        text-align: center;
+    }
+    .loading-spinner {
+        border: 0;
+        flex-grow: 0;
+        margin-bottom: 1rem;
+        max-height: 2rem;
+        max-width: 2rem;
+        transform-origin: center center;
+    }
+    .sprint-name {
+        a {
+            @extend %large;
+            @extend %title;
+            @include ellipsis($width: 90%);
+            display: inline-block;
+            margin-right: 3px;
+        }
+    }
+    .sprint {
+        margin-bottom: 2rem;
+        overflow: hidden;
+        header {
+            position: relative;
+        }
+
+        &:hover {
+            .icon-edit {
+                opacity: 1;
+                transition: opacity .2s ease-in;
+            }
+        }
+        .icon {
+            display: inline-block;
+        }
+        .icon-arrow-up {
+            transform: rotate(90deg);
+            transition: all .2s linear;
+            vertical-align: baseline;
+            &.active {
+                transform: rotate(180deg);
+                transition: all .2s linear;
+            }
+            &:hover {
+                color: $fresh-taiga;
+                transition: color .2s linear;
+            }
+        }
+        .icon-edit {
+            color: $gray-light;
+            opacity: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: opacity .2s ease-in;
+            vertical-align: baseline;
+            &:hover {
+                color: $green-taiga;
+                transition: color .2s ease-in;
+            }
+        }
+        .number {
+            @extend %large;
+        }
+        .description {
+            @extend %xsmall;
+            line-height: .6rem;
+            margin-top: 5px;
+        }
+        .sprint-summary {
+            display: flex;
+            justify-content: space-between;
+        }
+        .sprint-date {
+            @extend %large;
+            @extend %title;
+            color: $gray-light;
+            flex-flow: 1;
+        }
+        .sprint-points {
+            flex-grow: 1;
+        }
+        ul {
+            margin: 0;
+        }
+        li {
+            display: inline-block;
+            &:first-child {
+                margin-right: 3px;
+            }
+        }
+    }
+    .sprint-progress-bar {
+        background: $gray-light;
+        border-radius: 2px;
+        height: 8px;
+        margin-bottom: 1rem;
+        margin-top: .5rem;
+        position: relative;
+        width: 100%;
+        .current-progress {
+            background: $green-taiga;
+            border-radius: 2px;
+            height: 8px;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: calc(30% - 4px);
+        }
+    }
+    .sprint-table {
+        .row {
+            border-bottom: 1px solid $gray-light;
+            display: flex;
+            padding: .5em 0;
+            text-align: left;
+            width: 100%;
+            &:hover {
+                background: lighten($gray-light, 12%);
+                cursor: move;
+                transition: background .2s ease-in;
+            }
+            &:last-child {
+                border-bottom: 0;
+            }
+            &.sortable-placeholder {
+                background: lighten($gray-light, 12%);
+                height: 40px;
+            }
+            &.ui-sortable-helper {
+                background: lighten($green-taiga, 60%);
+                box-shadow: 1px 1px 10px rgba($black, .1);
+                transition: background .2s ease-in;
+            }
+
+        }
+        .column-us {
+            @extend %small;
+            flex-flow: 3;
+            padding: 0 4px;
+        }
+        .us-name {
+            @include ellipsis(250px);
+            display: block;
+            &.closed {
+                color: lighten($gray-light, 5%);
+            }
+            &.blocked {
+                color: $red;
+            }
+        }
+        .column-points {
+            flex-grow: 1;
+            padding: 0 4px;
+            text-align: right;
+            &.closed {
+                color: lighten($gray-light, 5%);
+            }
+            &.blocked {
+                color: $red;
+            }
+        }
+    }
+    .button-gray {
+        display: block;
+        margin-top: 1rem;
+        text-align: center;
+    }
+    .us-item-row {
+        .tags-block,
+        .us-settings,
+        .status,
+        .icon-drag-v,
+        .popover,
+        input {
+            display: none;
+        }
+        .user-story-name {
+            @extend %small;
+            line-height: 1rem;
+            margin-top: 5px;
+        }
+    }
+}
+
+// If sprint is closed and date is old
+.sprint-closed {
+    .sprint-table {
+        display: none;
+    }
+    .number,
+    .description {
+        color: $gray-light;
+    }
+    .sprint-progress-bar {
+        .current-progress {
+            background: darken($gray-light, 10%);
+        }
+    }
+    .button-gray {
+        background: $gray-light;
+    }
+}

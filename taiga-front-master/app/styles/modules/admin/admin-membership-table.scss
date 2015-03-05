@@ -1,0 +1,156 @@
+.admin-membership-table {
+    .title {
+        @extend %bold;
+    }
+    .avatar {
+        align-items: center;
+        display: flex;
+        justify-content: flex-start;
+        figcaption {
+            margin-left: 1rem;
+            width: 75%;
+            span {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                width: 100%;
+            }
+        }
+        img {
+            flex-basis: 35px;
+            flex-grow: 1;
+            max-width: 35px;
+        }
+        .name,
+        .email {
+            display: block;
+            width: 100%;
+        }
+        .name {
+            @extend %bold;
+        }
+        .email {
+            color: $gray-light;
+        }
+    }
+    .header-role,
+    .header-status {
+        padding-left: .5rem;
+    }
+    .row-role {
+        padding-right: 1rem;
+    }
+    .row-status {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+    }
+    .active,
+    .pending {
+        padding: 8px;
+    }
+    .active {
+        background-color: $whitish;
+    }
+    .pending {
+        background-color: $red-light;
+        color: $white;
+        .icon {
+            float: rsdsdfdvsdvight;
+        }
+        &:hover {
+            background-color: $red;
+            color: $white;
+            transition: background-color .3s linear;
+        }
+    }
+    .delete {
+        @extend %large;
+        color: $gray-light;
+        &:hover {
+            color: $red;
+        }
+    }
+    .row-admin {
+        input {
+            vertical-align: middle;
+        }
+        label {
+            @extend %small;
+        }
+    }
+    .row-member,
+    .row-role,
+    .header-member,
+    .header-role {
+        flex-basis: 210px;
+        flex-grow: 3;
+        min-width: 210px;
+    }
+    .row-admin,
+    .header-admin {
+        flex-basis: 0;
+        flex-grow: 1;
+        min-width: 70px;
+    }
+    .row-status,
+    .header-status {
+        flex-basis: 50px;
+        flex-grow: 1;
+    }
+    .check {
+        background-color: darken($whitish, 10%);
+        border-radius: 2px;
+        cursor: pointer;
+        height: 1.5rem;
+        overflow: hidden;
+        position: relative;
+        width: 65px;
+        input {
+            cursor: pointer;
+            height: 500px;
+            left: -10px;
+            opacity: 0;
+            position: absolute;
+            top: -10px;
+            width: 500px;
+            z-index: 999;
+            + div {
+                background-color: $gray;
+                height: 25px;
+                transition: all .2s linear;
+                width: 50%;
+            }
+            ~ .check-text {
+                //@include transition(opacity .3s linear);
+                @extend %small;
+                color: $white;
+                position: absolute;
+                top: .1rem;
+            }
+            ~ .check-yes {
+                opacity: 0;
+                right: .5rem;
+            }
+            ~ .check-no {
+                left: .5rem;
+                opacity: .6;
+            }
+        }
+        input:checked {
+            + div {
+                background-color: #74a218;
+                margin-left: 50%;
+                transition: all .2s linear;
+            }
+            ~ .check-yes {
+                opacity: .6;
+                right: .4rem;
+            }
+            ~ .check-no {
+                left: .4rem;
+                opacity: 0;
+            }
+        }
+    }
+}

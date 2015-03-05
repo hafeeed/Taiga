@@ -1,0 +1,116 @@
+.summary {
+    align-content: center;
+    background: $grayer;
+    color: $white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-bottom: 2rem;
+    padding: 1em;
+    .summary-stats {
+        display: flex;
+        margin: 0 .5rem;
+    }
+    .data {
+        margin-top: 4px;
+        .number {
+            color: $fresh-taiga;
+            top: 0;
+        }
+
+    }
+    .icon {
+        @extend %large;
+    }
+    .number {
+        @extend %xlarge;
+        @extend %bold;
+        margin-right: .3rem;
+        position: relative;
+        top: 5px;
+    }
+
+    .description {
+        @extend %small;
+        @extend %text;
+        line-height: .9rem;
+    }
+}
+
+.summary-progress-bar {
+    background: $white;
+    height: 30px;
+    margin-bottom: 0;
+    margin-right: 10px;
+    padding: 3px;
+    position: relative;
+    width: 15%;
+    .current-progress {
+        background: $fresh-taiga;
+        height: 24px;
+    }
+    .defined-points {
+        background: $red-light;
+        height: 24px;
+        position: absolute;
+        width: calc(100% - 6px);
+    }
+    .project-points-progress {
+        background: $white;
+        height: 24px;
+        position: absolute;
+    }
+    .closed-points-progress {
+        background: $fresh-taiga;
+        height: 24px;
+        position: absolute;
+    }
+}
+
+
+.large-summary {
+    justify-content: space-between;
+    .large-summary-wrapper {
+        align-content: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+    .summary-progress-wrapper {
+        display: flex;
+    }
+    .summary-progress-bar {
+        flex-basis: 200px;
+        min-width: 200px;
+    }
+    .summary-stats {
+        margin-right: 1rem;
+        &:last-child {
+            border: 0;
+            margin: 0;
+        }
+    }
+    .summary-stats-divider {
+        margin-right: 2rem;
+    }
+    .icon {
+        @extend %xlarge;
+        margin-right: .4rem;
+        &.icon-stats {
+            color: $gray;
+            float: right;
+            transition: color .3s linear;
+            &:hover {
+                color: $fresh-taiga;
+                transition: color .3s linear;
+            }
+            &.active {
+                color: $fresh-taiga;
+            }
+            &.active:hover {
+                color: $gray;
+                transition: color .3s linear;
+            }
+        }
+    }
+}

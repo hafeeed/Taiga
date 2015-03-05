@@ -1,0 +1,29 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'application'
+
+mainClassName = 'demo.Application'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'http://dl.bintray.com/kaleidos/maven'
+    }
+}
+
+dependencies {
+    compile 'net.kaleidos:taiga-importer-api-client:1.0.1'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.0'
+}

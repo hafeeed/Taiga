@@ -1,0 +1,35 @@
+<header class="header-container" ng-include="'/partials/header.html'"></header>
+<div class="middle-container search-content">
+    <div class="search-container">
+        <div class="search-header">
+            <p ng-show="results.count > 0" ng-bind-html="'search.you-searched'|i18next:{term: term}"></p>
+            <p ng-show="results.count == 0" ng-bind-html="'search.no-results'|i18next:{term: term}"></p>
+        </div>
+
+        <ul class="results-tab clearfix" ng-show="results.count > 0">
+            <li class="userstory-tab"
+                ng-repeat="type in resultTypes"
+                ng-class="{active: ctrl.isTypeActive(type)}"
+                ng-click="ctrl.setActiveType(type)">
+                {{ ctrl.translateResultType(type) }} ({{ results[type].length }})
+            </li>
+        </ul>
+
+        <div class="search-results">
+            <div class="results" ng-repeat="type in resultTypes" ng-show="ctrl.isTypeActive(type)">
+                <ul class="result-list">
+                    <li class="result-item" ng-repeat="item in results[type]">
+                        <div class="title">
+                            <a href="{{ ctrl.translateTypeUrl(type, projectSlug, item) }}">
+                                {{ ctrl.translateTypeTitle(type, item) }}
+                            </a>
+                        </div>
+                        <div class="description">
+                            {{ ctrl.translateTypeDescription(type, item)|truncate:200 }}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

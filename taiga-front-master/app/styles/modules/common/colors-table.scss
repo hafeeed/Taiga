@@ -1,0 +1,123 @@
+.colors-table {
+    .table-header {
+        @extend %medium;
+        @extend %bold;
+        border-bottom: 2px solid $gray-light;
+        &:hover {
+            background: transparent;
+        }
+        .row {
+            padding-left: 50px;
+        }
+    }
+    .row {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        padding: 1rem;
+        &:hover {
+            .options-column {
+                opacity: 1;
+                transition: opacity .3s linear;
+            }
+        }
+        &.edition,
+        &.new-value {
+            padding-left: 50px;
+        }
+        &.hidden {
+            display: none;
+        }
+        &.edition {
+            .current-color {
+                cursor: pointer;
+            }
+        }
+        .color-column {
+            flex-basis: 60px;
+            flex-grow: 1;
+            max-width: 100px;
+            position: relative;
+        }
+        .is-archived-column,
+        .is-closed-column,
+        .options-column,
+        .status-wip-limit {
+            flex-basis: 100px;
+            flex-grow: 1;
+        }
+        .status-name {
+            flex-basis: 150px;
+            flex-grow: 6;
+            padding: 0 10px;
+            position: relative;
+            span {
+                @include ellipsis(100%);
+                display: block;
+            }
+        }
+        .status-slug {
+            flex-basis: 150px;
+            flex-grow: 6;
+            padding: 0 10px;
+        }
+        .options-column {
+            max-width: 100px;
+            opacity: 0;
+            text-align: right;
+        }
+        .is-archived-column {
+            max-width: 130px;
+            padding: 0 0 0 10px;
+            text-align: center;
+        }
+        .is-closed-column {
+            max-width: 130px;
+            text-align: center;
+        }
+        .status-wip-limit {
+            max-width: 130px;
+            padding: 0 0 0 10px;
+            text-align: center;
+        }
+    }
+    .row-edit {
+        .options-column {
+            opacity: 1;
+        }
+    }
+    .table-main {
+        border-bottom: 1px solid $gray-light;
+        .row {
+            &:hover {
+                background: lighten($green-taiga, 60%);
+                cursor: move;
+                transition: background .2s ease-in;
+            }
+        }
+    }
+    .current-color {
+        background-color: $gray-light;
+        border-radius: 2px;
+        height: 40px;
+        width: 40px;
+    }
+    .icon {
+        @extend %large;
+        color: $gray-light;
+        margin-right: 1rem;
+        &:hover {
+            color: $green-taiga;
+        }
+    }
+    .icon-delete {
+        &:hover {
+            color: $red;
+        }
+    }
+    .icon-check-square {
+        @extend %large;
+        color: $green-taiga;
+    }
+
+}

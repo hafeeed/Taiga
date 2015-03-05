@@ -1,0 +1,124 @@
+Other ways to setup initial environment
+=======================================
+:toc: left
+:numbered:
+
+[[setup-taiga-scripts]]
+Setup using **taiga-scripts**
+-----------------------------
+
+Introduction
+~~~~~~~~~~~~
+
+**taiga-scrips** primarily follows the standard installation process, but makes it more automatic. If
+something goes wrong in the process, you should try fix them following the manual deploy process.
+
+**taiga-scripts** always installs a specific (most recent) version of Taiga (taiga-front and taiga-back)
+
+
+Important notes about using **taiga-scripts**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- They are in alpha state. Not heavy tested in differents environments
+- Designed to work with taiga-vagrant (see next section of this documentation)
+- Does not supports reprovisioning (updating) at this moment, it still in development.
+- Does not support installation with root user.
+- The installation is not 100% ready for production.
+
+
+Requirements
+~~~~~~~~~~~~
+
+- Fresh installed and updated Ubuntu 14.04
+- Bash shell
+- Git
+
+
+Setup server-like environment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Make sure you have a fresh and updated ubuntu 14.04 machine or virtual image:
+
+[source, txt]
+----
+$ git clone https://github.com/taigaio/taiga-scripts.git
+$ cd taiga-scripts
+$ bash setup-server.sh
+----
+
+
+Setup development-like environment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This setup is much like the previous one but with a few differences:
+
+- Do not install services like nginx, as they are only necessary for production
+- Set all hostnames to localhost to easily run everything on localhost
+
+Make sure you have a fresh and updated ubuntu 14.04 machine or virtual image:
+
+[source, txt]
+----
+$ git clone https://github.com/taigaio/taiga-scripts.git
+$ cd taiga-scripts
+$ bash setup-devel.sh
+----
+
+[[setup-taiga-vagrant]]
+Setup using **taiga-vagrant**
+-----------------------------
+
+Introduction
+~~~~~~~~~~~~
+
+**taiga-vagrant** offers a Vagrantfile for make easy turn on a fully provisioned virtual
+machine. **taiga-vagrant** uses **taiga-scripts** to provision scripts.
+
+
+Important notes about using **taiga-vagrant**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- The installation is not 100% ready for production, it is designed for use as a demostration.
+- Does not support reprovisioning at this momment.
+
+Dependencies
+~~~~~~~~~~~~
+
+- link:https://www.virtualbox.org/wiki/Downloads[VirtualBox]
+- link:http://downloads.vagrantup.com/[Vagrant]
+
+
+Installation
+~~~~~~~~~~~~
+
+[source, bash]
+----
+git clone https://github.com/taigaio/taiga-vagrant.git
+cd taiga-vagrant
+vagrant up
+----
+
+After installing, the Taiga service should be up and running. You can access it by going
+to http://localhost:8000 with your browser.
+
+You can use the following credentials for login in recently created Taiga instance:
+
+- Username: `admin`
+- Password: `123123`
+
+You can access to the machine using ssh, if you would make some tweaks:
+
+[source, bash]
+----
+vagrant ssh
+----
+
+[[setup-taiga-docker]]
+Setup using **taiga-docker**
+-----------------------------
+
+
+Important notes about using **taiga-docker**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Docker is not officially supported by the Taiga development team but a link:https://github.com/ipedrazas/taiga-docker[docker script] has been developed by link:https://github.com/ipedrazas[Iván Pedrazas]
